@@ -11,13 +11,16 @@
   "dependencies": {
     "@nrwl/next": "12.10.0",
     "@simondotm/nx-firebase": "^0.3.3",
+    "autoprefixer": "^10.4.0",
     "core-js": "^3.6.5",
-    "firebase-admin": "latest",
-    "firebase-functions": "latest",
+    "firebase-admin": "^10.0.0",
+    "firebase-functions": "^3.16.0",
     "next": "11.1.0",
+    "postcss": "^8.3.11",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
+    "tailwindcss": "^2.2.19",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
