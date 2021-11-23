@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "listic-firebase": {
+      "tags": []
+    },
     "listic-web": {
       "tags": []
     },

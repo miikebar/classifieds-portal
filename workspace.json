@@ -1,6 +1,74 @@
 {
   "version": 2,
   "projects": {
+    "listic-firebase": {
+      "root": "apps/listic-firebase",
+      "sourceRoot": "apps/listic-firebase/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@simondotm/nx-firebase:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/listic-firebase",
+            "main": "apps/listic-firebase/src/index.ts",
+            "tsConfig": "apps/listic-firebase/tsconfig.app.json",
+            "packageJson": "apps/listic-firebase/package.json",
+            "assets": [
+              "apps/listic-firebase/*.md",
+              "apps/listic-firebase/.runtimeconfig.json"
+            ]
+          }
+        },
+        "deploy": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "firebase deploy --config firebase.listic-firebase.json"
+          }
+        },
+        "getconfig": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "firebase functions:config:get --config firebase.listic-firebase.json > apps/listic-firebase/.runtimeconfig.json"
+          }
+        },
+        "emulate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "firebase emulators:start --config firebase.listic-firebase.json"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "nx run listic-firebase:build --with-deps && nx run listic-firebase:build --watch"
+              },
+              {
+                "command": "nx run listic-firebase:emulate"
+              }
+            ],
+            "parallel": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/listic-firebase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/listic-firebase"],
+          "options": {
+            "jestConfig": "apps/listic-firebase/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "listic-web": {
       "root": "apps/listic-web",
       "sourceRoot": "apps/listic-web",
