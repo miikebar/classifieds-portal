@@ -67,7 +67,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "listic-web": {
       "root": "apps/listic-web",
@@ -119,7 +120,8 @@
             "lintFilePatterns": ["apps/listic-web/**/*.{ts,tsx,js,jsx}"]
           }
         }
-      }
+      },
+      "tags": []
     },
     "listic-web-e2e": {
       "root": "apps/listic-web-e2e",
@@ -146,24 +148,9 @@
             "lintFilePatterns": ["apps/listic-web-e2e/**/*.{js,ts}"]
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["listic-web"]
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "babel": true
-      }
-    },
-    "@nrwl/next": {
-      "application": {
-        "style": "css",
-        "linter": "eslint"
-      }
-    }
-  },
-  "defaultProject": "listic-web"
+  }
 }

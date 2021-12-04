@@ -1,5 +1,5 @@
 export function Index() {
-  return <div>Hello world!</div>;
+  return <div className="bg-purple-500">Hello world of Next.js!</div>;
 }
 
 export default Index;
