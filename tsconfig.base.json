@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
+      "@listic/feature/layout": ["libs/feature/layout/src/index.ts"],
+      "@listic/feature/navbar": ["libs/feature/navbar/src/index.ts"],
+      "@listic/feature/route": ["libs/feature/route/src/index.ts"],
+      "@listic/ui/button": ["libs/ui/button/src/index.ts"],
+      "@listic/ui/container": ["libs/ui/container/src/index.ts"],
+      "@listic/ui/logo": ["libs/ui/logo/src/index.ts"],
+      "@listic/ui/spinner": ["libs/ui/spinner/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,5 +1,9 @@
-export function Index() {
-  return <div className="bg-purple-500">Hello world of Next.js!</div>;
-}
+import { getNavbarLayout, PageWithLayout } from '@listic/feature/layout';
 
-export default Index;
+const LandingPage: PageWithLayout = () => {
+  return <div>Landing page</div>;
+};
+
+LandingPage.getLayout = getNavbarLayout;
+
+export default LandingPage;
