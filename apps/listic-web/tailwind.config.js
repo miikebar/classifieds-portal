@@ -16,6 +16,9 @@ module.exports = {
       maxWidth: {
         container: '1320px',
       },
+      width: {
+        'off-canvas': '300px',
+      },
     },
   },
   variants: {

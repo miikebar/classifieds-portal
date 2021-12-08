@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import { Spinner } from '@listic/ui/spinner';
 import cs from 'classnames';
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
+export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   isDisabled?: boolean;
   isLoading?: boolean;
   loadingText?: string;
@@ -57,6 +57,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cs({
+          [className]: true,
           [primaryClasses]: variant === 'primary',
           [disabledClasses]: isLoading || isDisabled,
           [baseClasses]: true,

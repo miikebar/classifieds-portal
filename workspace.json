@@ -290,6 +290,29 @@
         }
       }
     },
+    "ui-icons": {
+      "root": "libs/ui/icons",
+      "sourceRoot": "libs/ui/icons/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/icons/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/icons"],
+          "options": {
+            "jestConfig": "libs/ui/icons/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "ui-logo": {
       "root": "libs/ui/logo",
       "sourceRoot": "libs/ui/logo/src",
@@ -308,6 +331,29 @@
           "outputs": ["coverage/libs/ui/logo"],
           "options": {
             "jestConfig": "libs/ui/logo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-off-canvas": {
+      "root": "libs/ui/off-canvas",
+      "sourceRoot": "libs/ui/off-canvas/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/off-canvas/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/off-canvas"],
+          "options": {
+            "jestConfig": "libs/ui/off-canvas/jest.config.js",
             "passWithNoTests": true
           }
         }

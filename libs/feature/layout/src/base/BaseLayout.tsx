@@ -1,7 +1,13 @@
 import React from 'react';
+import { OffCanvasMenu } from '@listic/ui/off-canvas';
 
 const BaseLayout: React.FC = ({ children }) => {
-  return <div>{children}</div>;
+  return (
+    <>
+      <OffCanvasMenu />
+      <div>{children}</div>
+    </>
+  );
 };
 
 export const getBaseLayout = (page: React.ReactNode) => {
