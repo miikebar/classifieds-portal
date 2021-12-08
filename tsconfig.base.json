@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
+      "@listic/feature/footer": ["libs/feature/footer/src/index.ts"],
       "@listic/feature/layout": ["libs/feature/layout/src/index.ts"],
       "@listic/feature/navbar": ["libs/feature/navbar/src/index.ts"],
       "@listic/feature/route": ["libs/feature/route/src/index.ts"],

@@ -24,6 +24,29 @@
         }
       }
     },
+    "feature-footer": {
+      "root": "libs/feature/footer",
+      "sourceRoot": "libs/feature/footer/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/footer/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/footer"],
+          "options": {
+            "jestConfig": "libs/feature/footer/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "feature-layout": {
       "root": "libs/feature/layout",
       "sourceRoot": "libs/feature/layout/src",

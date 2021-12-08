@@ -1,1 +1,1 @@
-export * from './lib/feature-auth';
+export * from './signup/AuthSignUpForm';

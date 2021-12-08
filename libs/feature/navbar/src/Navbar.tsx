@@ -24,7 +24,16 @@ export const Navbar: React.FC = () => {
             </a>
           </Link>
         </div>
-        <Button>Zaloguj się</Button>
+        <div className="flex gap-2">
+          <Link passHref href={Route.AUTH.SIGN_UP}>
+            <Button as="a" variant="ghost">
+              Utwórz konto
+            </Button>
+          </Link>
+          <Link passHref href={Route.AUTH.SIGN_IN}>
+            <Button as="a">Zaloguj się</Button>
+          </Link>
+        </div>
       </Container>
     </div>
   );

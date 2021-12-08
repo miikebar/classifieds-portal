@@ -5,7 +5,7 @@ const BaseLayout: React.FC = ({ children }) => {
   return (
     <>
       <OffCanvasMenu />
-      <div>{children}</div>
+      {children}
     </>
   );
 };

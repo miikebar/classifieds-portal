@@ -1,4 +1,4 @@
-import { getNavbarLayout, PageWithLayout } from '@listic/feature/layout';
+import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
 import { Container } from '@listic/ui/container';
 import { Search } from '@listic/feature/search';
 
@@ -30,6 +30,6 @@ const LandingPage: PageWithLayout = () => {
   );
 };
 
-LandingPage.getLayout = getNavbarLayout;
+LandingPage.getLayout = getMainLayout;
 
 export default LandingPage;

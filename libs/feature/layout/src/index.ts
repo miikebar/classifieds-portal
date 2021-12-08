@@ -1,3 +1,4 @@
+export * from './auth/AuthLayout';
 export * from './base/BaseLayout';
-export * from './navbar/NavbarLayout';
+export * from './main/MainLayout';
 export * from './types/PageWithLayout';
