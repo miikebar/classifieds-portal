@@ -19,9 +19,11 @@
       "@listic/feature/layout": ["libs/feature/layout/src/index.ts"],
       "@listic/feature/navbar": ["libs/feature/navbar/src/index.ts"],
       "@listic/feature/route": ["libs/feature/route/src/index.ts"],
+      "@listic/feature/search": ["libs/feature/search/src/index.ts"],
       "@listic/ui/button": ["libs/ui/button/src/index.ts"],
       "@listic/ui/container": ["libs/ui/container/src/index.ts"],
       "@listic/ui/icons/*": ["libs/ui/icons/src/*"],
+      "@listic/ui/input": ["libs/ui/input/src/index.ts"],
       "@listic/ui/logo": ["libs/ui/logo/src/index.ts"],
       "@listic/ui/off-canvas": ["libs/ui/off-canvas/src/index.ts"],
       "@listic/ui/spinner": ["libs/ui/spinner/src/index.ts"]

@@ -15,6 +15,10 @@ module.exports = {
       },
       maxWidth: {
         container: '1320px',
+        heroText: '672px',
+      },
+      minHeight: {
+        hero: '800px',
       },
       width: {
         'off-canvas': '300px',

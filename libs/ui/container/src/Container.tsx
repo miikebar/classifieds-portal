@@ -8,7 +8,10 @@ export const Container: React.FC<ContainerProps> = ({
   ...restProps
 }) => {
   return (
-    <div className={`max-w-container mx-auto px-4 ${className}`} {...restProps}>
+    <div
+      className={`max-w-container mx-auto px-4 w-full ${className}`}
+      {...restProps}
+    >
       {children}
     </div>
   );

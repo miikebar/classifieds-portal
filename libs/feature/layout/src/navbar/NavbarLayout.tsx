@@ -6,7 +6,7 @@ const NavbarLayout: React.FC = ({ children }) => {
   return (
     <>
       <Navbar />
-      <div>{children}</div>
+      <div className="pt-16">{children}</div>
     </>
   );
 };
