@@ -1,6 +1,6 @@
 {
-  "targets": {
-  },
   "projects": {
-  }
+    "default": "listic-app"
+  },
+  "targets": {}
 }
