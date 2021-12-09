@@ -336,6 +336,29 @@
         }
       }
     },
+    "ui-form": {
+      "root": "libs/ui/form",
+      "sourceRoot": "libs/ui/form/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/form/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/form"],
+          "options": {
+            "jestConfig": "libs/ui/form/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "ui-icons": {
       "root": "libs/ui/icons",
       "sourceRoot": "libs/ui/icons/src",

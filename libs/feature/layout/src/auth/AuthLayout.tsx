@@ -3,7 +3,7 @@ import { getMainLayout } from '..';
 
 const AuthLayout: React.FC = ({ children }) => {
   return (
-    <div className="flex-1 bg-gray-100 lg:grid lg:place-items-center">
+    <div className="flex-1 lg:bg-gray-100 lg:grid lg:place-items-center">
       {children}
     </div>
   );

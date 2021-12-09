@@ -14,6 +14,7 @@ export const Navbar: React.FC = () => {
       <Container className="h-full flex items-center justify-between">
         <div>
           <IconButton
+            variant="ghost"
             icon={<BarsIcon />}
             onClick={open}
             className="md:hidden mr-2"
@@ -26,7 +27,7 @@ export const Navbar: React.FC = () => {
         </div>
         <div className="flex gap-2">
           <Link passHref href={Route.AUTH.SIGN_UP}>
-            <Button as="a" variant="ghost">
+            <Button as="a" variant="ghost" className="hidden md:block">
               Utwórz konto
             </Button>
           </Link>
