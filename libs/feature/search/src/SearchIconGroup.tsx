@@ -10,7 +10,7 @@ export const SearchIconGroup: React.FC<SearchInputGroupProps> = ({
 }) => {
   return (
     <div className="flex h-12 items-center md:flex-1">
-      <div className="w-8 h-8 bg-gray-100 p-2 rounded-full text-yellow-400 mr-3 grid place-items-center">
+      <div className="w-8 h-8 bg-gray-100 p-2 rounded-full text-amber-400 mr-3 grid place-items-center">
         {icon}
       </div>
       <div className="md:flex-1 flex flex-col">

@@ -22,9 +22,9 @@ export const OffCanvasMenu: React.FC = () => {
       <Transition.Child
         as={React.Fragment}
         enter="transition-all"
-        enterFrom="transform -translate-x-full"
+        enterFrom="-translate-x-full"
         leave="transition-all"
-        leaveTo="transform -translate-x-full"
+        leaveTo="-translate-x-full"
       >
         <div className="fixed left-0 top-0 h-screen w-off-canvas z-30 bg-white shadow-md">
           Hello

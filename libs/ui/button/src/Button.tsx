@@ -92,6 +92,6 @@ export const Button: PolymorphicForwardRefExoticComponent<
 
 const baseClasses =
   'relative inline-flex justify-center items-center py-2 px-4 rounded-md font-medium transition-colors';
-const primaryClasses = 'bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200';
+const primaryClasses = 'bg-amber-400 hover:bg-amber-300 active:bg-amber-200';
 const ghostClasses = 'hover:bg-gray-100 active:bg-gray-200';
 const disabledClasses = 'opacity-50 cursor-not-allowed';

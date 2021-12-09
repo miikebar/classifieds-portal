@@ -21,7 +21,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
-        className="bg-gray-200 text-black placeholder-gray-800 p-3 outline-none rounded-md border-2 border-transparent transition-all focus:border-yellow-400"
+        className="bg-gray-200 text-black placeholder-gray-800 p-3 outline-none rounded-md border-2 border-transparent transition-all focus:border-amber-400"
         id={control.inputId ?? id}
         required={control.isRequired ?? required}
         disabled={control.isDisabled ?? disabled}

@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
-  purge: [
+  content: [
     join(__dirname, 'pages/**/*.{js,ts,jsx,tsx}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
@@ -24,9 +24,6 @@ module.exports = {
         'off-canvas': '300px',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };
