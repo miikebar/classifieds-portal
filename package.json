@@ -9,7 +9,8 @@
     "test": "nx test",
     "format": "nx format:write --uncommitted",
     "prepare": "husky install",
-    "analyze": "cross-env ANALYZE=true nx build listic-web"
+    "analyze": "cross-env ANALYZE=true nx build listic-web",
+    "postinstall": "patch-package"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md}": [
@@ -28,9 +29,11 @@
     "cross-env": "^7.0.3",
     "firebase-admin": "^10.0.0",
     "firebase-functions": "^3.16.0",
+    "firebase-tools": "^9.23.1",
     "next": "12.0.4",
     "next-compose-plugins": "^2.2.1",
     "next-translate": "^1.2.0",
+    "patch-package": "^6.4.7",
     "postcss": "^8.3.11",
     "preact": "^10.6.2",
     "preact-ssr-prepass": "^1.2.0",
@@ -42,6 +45,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@angular-devkit/schematics": "^13.0.4",
     "@nrwl/cli": "13.2.3",
     "@nrwl/cypress": "13.2.3",
     "@nrwl/eslint-plugin-nx": "13.2.3",

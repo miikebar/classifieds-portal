@@ -1,0 +1,26 @@
+diff --git a/node_modules/@simondotm/nx-firebase/src/executors/build/build.js b/node_modules/@simondotm/nx-firebase/src/executors/build/build.js
+index ba14795..16aa79f 100644
+--- a/node_modules/@simondotm/nx-firebase/src/executors/build/build.js
++++ b/node_modules/@simondotm/nx-firebase/src/executors/build/build.js
+@@ -42,7 +42,7 @@ function runExecutor(options, context) {
+         debugLog("Running Executor for Firebase Build for project '" + context.projectName + "'");
+         debugLog('options=', options);
+         // get the project graph; returns an object containing all nodes in the workspace, files, and dependencies
+-        const projGraph = project_graph_1.createProjectGraph();
++        const projGraph = yield project_graph_1.createProjectGraphAsync('4.0');
+         // nx firebase functions are essentially @nrwl/node:package libraries, but are added to the project
+         // as applications as they are fundamentally the deployable "application" output of a build pipeline.
+         // Due to this, we can import standard node libraries as dependencies from within the workspace
+diff --git a/node_modules/@simondotm/nx-firebase/src/executors/build/node/package/package.js b/node_modules/@simondotm/nx-firebase/src/executors/build/node/package/package.js
+index a3218e7..835ecb5 100644
+--- a/node_modules/@simondotm/nx-firebase/src/executors/build/node/package/package.js
++++ b/node_modules/@simondotm/nx-firebase/src/executors/build/node/package/package.js
+@@ -11,7 +11,7 @@ const normalize_options_1 = require("./utils/normalize-options");
+ const cli_1 = require("./utils/cli");
+ function packageExecutor(options, context) {
+     return tslib_1.__awaiter(this, void 0, void 0, function* () {
+-        const projGraph = project_graph_1.createProjectGraph();
++        const projGraph = yield project_graph_1.createProjectGraphAsync('4.0');
+         const libRoot = context.workspace.projects[context.projectName].root;
+         const normalizedOptions = normalize_options_1.default(options, context, libRoot);
+         const { target, dependencies } = buildable_libs_utils_1.calculateProjectDependencies(projGraph, context.root, context.projectName, context.targetName, context.configurationName);
