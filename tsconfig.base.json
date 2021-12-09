@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@listic/core/auth": ["libs/core/auth/src/index.ts"],
+      "@listic/core/firebase": ["libs/core/firebase/src/index.ts"],
+      "@listic/core/user": ["libs/core/user/src/index.ts"],
       "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
       "@listic/feature/footer": ["libs/feature/footer/src/index.ts"],
       "@listic/feature/layout": ["libs/feature/layout/src/index.ts"],

@@ -31,17 +31,23 @@ export const AuthSignUpForm: React.FC = () => {
         </p>
       </div>
       <form className="flex flex-col gap-4">
-        <FormControl>
-          <FormLabel>Imię</FormLabel>
-          <Input placeholder="Podaj swoje imię" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Nazwisko</FormLabel>
-          <Input placeholder="Podaj swoje nazwisko" />
-        </FormControl>
-        <FormControl>
+        <div className="flex flex-col gap-4 lg:flex-row lg:gap-0">
+          <FormControl isRequired className="lg:w-1/2 lg:pr-2">
+            <FormLabel>Imię</FormLabel>
+            <Input placeholder="Podaj swoje imię" />
+          </FormControl>
+          <FormControl isRequired className="lg:w-1/2 lg:pl-2">
+            <FormLabel>Nazwisko</FormLabel>
+            <Input placeholder="Podaj swoje nazwisko" />
+          </FormControl>
+        </div>
+        <FormControl isRequired>
           <FormLabel>Adres email</FormLabel>
           <Input type="email" placeholder="Podaj swój adres email" />
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel>Hasło</FormLabel>
+          <Input type="password" placeholder="Ustaw hasło do konta" />
         </FormControl>
         <FormControl>
           <FormLabel>Numer telefonu</FormLabel>

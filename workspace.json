@@ -1,6 +1,75 @@
 {
   "version": 2,
   "projects": {
+    "core-auth": {
+      "root": "libs/core/auth",
+      "sourceRoot": "libs/core/auth/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/auth/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/auth"],
+          "options": {
+            "jestConfig": "libs/core/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-firebase": {
+      "root": "libs/core/firebase",
+      "sourceRoot": "libs/core/firebase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase"],
+          "options": {
+            "jestConfig": "libs/core/firebase/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-user": {
+      "root": "libs/core/user",
+      "sourceRoot": "libs/core/user/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/user/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/user"],
+          "options": {
+            "jestConfig": "libs/core/user/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "feature-auth": {
       "root": "libs/feature/auth",
       "sourceRoot": "libs/feature/auth/src",
