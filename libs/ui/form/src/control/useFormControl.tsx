@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import { FormControlProps } from './FormControl';
-import { useId } from '@reach/auto-id';
+import { useId } from '@listic/ui/id';
 
 type FormControlContextData = ReturnType<typeof useProvideFormControl>;
 

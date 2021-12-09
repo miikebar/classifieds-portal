@@ -47,6 +47,29 @@
       },
       "tags": []
     },
+    "core-schema": {
+      "root": "libs/core/schema",
+      "sourceRoot": "libs/core/schema/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/schema/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/schema"],
+          "options": {
+            "jestConfig": "libs/core/schema/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "core-user": {
       "root": "libs/core/user",
       "sourceRoot": "libs/core/user/src",
@@ -446,6 +469,29 @@
           "outputs": ["coverage/libs/ui/icons"],
           "options": {
             "jestConfig": "libs/ui/icons/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-id": {
+      "root": "libs/ui/id",
+      "sourceRoot": "libs/ui/id/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/id/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/id"],
+          "options": {
+            "jestConfig": "libs/ui/id/jest.config.js",
             "passWithNoTests": true
           }
         }

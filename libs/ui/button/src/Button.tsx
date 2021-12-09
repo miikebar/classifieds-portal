@@ -49,11 +49,20 @@ export const Button: PolymorphicForwardRefExoticComponent<
       <span
         className={cs({
           invisible: isLoading,
+          'flex items-center gap-2': true,
         })}
       >
-        {leftIcon && <span>{leftIcon}</span>}
+        {leftIcon &&
+          React.cloneElement(leftIcon as React.ReactElement, {
+            width: '1em',
+            height: '1em',
+          })}
         {children}
-        {rightIcon && <span>{rightIcon}</span>}
+        {rightIcon &&
+          React.cloneElement(rightIcon as React.ReactElement, {
+            width: '1em',
+            height: '1em',
+          })}
       </span>
     );
   };

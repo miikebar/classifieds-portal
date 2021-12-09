@@ -5,9 +5,14 @@ import { Route } from '@listic/feature/route';
 import { Button, IconButton } from '@listic/ui/button';
 import { useOffCanvas } from '@listic/ui/off-canvas';
 import { ReactComponent as BarsIcon } from '@listic/ui/icons/bars-solid.svg';
+import { useAuth } from '@listic/core/auth';
+import { useUserProfile } from '@listic/core/user';
+import { ReactComponent as IconPlus } from '@listic/ui/icons/plus-solid.svg';
 
 export const Navbar: React.FC = () => {
   const { open } = useOffCanvas();
+  const { isAuthenticated, signOut } = useAuth();
+  const { user } = useUserProfile();
 
   return (
     <div className="fixed bg-white left-0 top-0 w-full h-16 z-10">
@@ -25,16 +30,26 @@ export const Navbar: React.FC = () => {
             </a>
           </Link>
         </div>
-        <div className="flex gap-2">
-          <Link passHref href={Route.AUTH.SIGN_UP}>
-            <Button as="a" variant="ghost" className="hidden md:block">
-              Utwórz konto
-            </Button>
-          </Link>
-          <Link passHref href={Route.AUTH.SIGN_IN}>
-            <Button as="a">Zaloguj się</Button>
-          </Link>
-        </div>
+        {!isAuthenticated && (
+          <div className="flex gap-2">
+            <Link passHref href={Route.AUTH.SIGN_UP}>
+              <Button as="a" variant="ghost" className="hidden md:block">
+                Utwórz konto
+              </Button>
+            </Link>
+            <Link passHref href={Route.AUTH.SIGN_IN}>
+              <Button as="a">Zaloguj się</Button>
+            </Link>
+          </div>
+        )}
+        {user && (
+          <div className="flex gap-4 items-center">
+            <Button leftIcon={<IconPlus />}>Dodaj ogłoszenie</Button>
+            <span className="cursor-pointer" onClick={signOut}>
+              {user.name} {user.surname}
+            </span>
+          </div>
+        )}
       </Container>
     </div>
   );

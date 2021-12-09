@@ -17,6 +17,7 @@
     "paths": {
       "@listic/core/auth": ["libs/core/auth/src/index.ts"],
       "@listic/core/firebase": ["libs/core/firebase/src/index.ts"],
+      "@listic/core/schema": ["libs/core/schema/src/index.ts"],
       "@listic/core/user": ["libs/core/user/src/index.ts"],
       "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
       "@listic/feature/footer": ["libs/feature/footer/src/index.ts"],
@@ -28,6 +29,7 @@
       "@listic/ui/container": ["libs/ui/container/src/index.ts"],
       "@listic/ui/form": ["libs/ui/form/src/index.ts"],
       "@listic/ui/icons/*": ["libs/ui/icons/src/*"],
+      "@listic/ui/id": ["libs/ui/id/src/index.ts"],
       "@listic/ui/input": ["libs/ui/input/src/index.ts"],
       "@listic/ui/logo": ["libs/ui/logo/src/index.ts"],
       "@listic/ui/off-canvas": ["libs/ui/off-canvas/src/index.ts"],

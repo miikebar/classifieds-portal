@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
 import { useFormControl } from '../control/useFormControl';
+import classes from './FormLabel.module.css';
 
 export const FormLabel: React.FC<ComponentPropsWithoutRef<'label'>> = ({
   children,
@@ -15,7 +16,7 @@ export const FormLabel: React.FC<ComponentPropsWithoutRef<'label'>> = ({
       htmlFor={control.inputId}
       data-disabled={control.isDisabled}
       data-required={control.isRequired}
-      className={`cursor-default select-none font-semibold disabled:opacity-50 required:after:inline-block required:after:ml-1 required:after:text-red-600 ${className}`}
+      className={`${classes.root} cursor-default select-none font-semibold disabled:opacity-50 ${className}`}
     >
       {children}
     </label>
