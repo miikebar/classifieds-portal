@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut as authSignOut,
+  signInWithEmailAndPassword,
   User,
   UserProfile,
 } from 'firebase/auth';
@@ -15,6 +16,7 @@ import {
   useState,
 } from 'react';
 import { auth } from './auth';
+import { SignInData } from './signin/SignInSchema';
 import { SignUpData } from './signup/SignupSchema';
 
 type AuthContextData = ReturnType<typeof useProvideAuth>;
@@ -57,6 +59,10 @@ const useProvideAuth = () => {
     []
   );
 
+  const signIn = useCallback(({ email, password }: SignInData) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  }, []);
+
   const signOut = useCallback(() => {
     return authSignOut(auth);
   }, []);
@@ -67,6 +73,7 @@ const useProvideAuth = () => {
     isLoading,
     isAuthenticated,
     createUser,
+    signIn,
     signOut,
   };
 };
