@@ -1,12 +1,10 @@
-import { app, Collection, firestore } from '@listic/core/firebase';
+import { Collection, firestore } from '@listic/core/firebase';
 import {
-  connectAuthEmulator,
   createUserWithEmailAndPassword,
-  getAuth,
   onAuthStateChanged,
+  signOut as authSignOut,
   User,
   UserProfile,
-  signOut as authSignOut,
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import {
@@ -16,21 +14,8 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { auth } from './auth';
 import { SignUpData } from './signup/SignupSchema';
-
-const auth = getAuth(app);
-
-if (
-  process.env.NEXT_PUBLIC_FIREBASE_EMULATORS_ENABLED === 'true' &&
-  typeof window !== 'undefined' &&
-  !(window as any)._authEmulatorInit
-) {
-  connectAuthEmulator(
-    auth,
-    `http://${process.env.NEXT_PUBLIC_FIREBASE_EMULATORS_HOST}:9099`
-  );
-  (window as any)._authEmulatorInit = true;
-}
 
 type AuthContextData = ReturnType<typeof useProvideAuth>;
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);

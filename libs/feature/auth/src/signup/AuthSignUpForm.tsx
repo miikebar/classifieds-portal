@@ -3,6 +3,7 @@ import { Button } from '@listic/ui/button';
 import { FormControl, FormErrorMessage, FormLabel } from '@listic/ui/form';
 import { Input } from '@listic/ui/input';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import { AuthContainer } from '../container/AuthContainer';
 import { useSignUpForm } from './useSignUpForm';
 
@@ -12,7 +13,14 @@ export const AuthSignUpForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useSignUpForm();
+  } = useSignUpForm({
+    onSuccess: () => {
+      toast.success('Pomyślnie utworzono nowe konto');
+    },
+    onError: () => {
+      toast.error('Podczas tworzenia konta wystąpił błąd. Spróbuj ponownie!');
+    },
+  });
 
   const renderHeader = () => {
     return (
