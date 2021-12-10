@@ -19,6 +19,7 @@ module.exports = {
       },
       minHeight: {
         hero: '800px',
+        textarea: '300px',
       },
       width: {
         'off-canvas': '300px',

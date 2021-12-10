@@ -4,4 +4,8 @@ export const Route = {
     SIGN_IN: '/auth/signin',
     SIGN_UP: '/auth/signup',
   },
+  OFFER: {
+    VIEW: '/offer',
+    CREATE: '/create-offer',
+  },
 };

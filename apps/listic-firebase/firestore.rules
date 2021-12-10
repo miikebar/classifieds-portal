@@ -14,6 +14,11 @@ service cloud.firestore {
       allow write: if isRequestedUser(uid);
     }
 
+    match /offers/{uid} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
