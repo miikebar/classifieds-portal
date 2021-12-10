@@ -2,8 +2,11 @@ import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
 import { Container } from '@listic/ui/container';
 import { Search } from '@listic/feature/search';
 import { OfferList } from '@listic/feature/offer/list';
+import { useState } from 'react';
 
 const LandingPage: PageWithLayout = () => {
+  const [query, setQuery] = useState('');
+
   return (
     <div className="flex-1 flex flex-col bg-gray-100">
       <div className="flex flex-col min-h-hero bg-blue-50">
@@ -22,12 +25,12 @@ const LandingPage: PageWithLayout = () => {
                 czego potrzebujesz jest w zasięgu Twojej ręki!
               </p>
             </div>
-            <Search />
+            <Search onQueryChange={setQuery} />
           </div>
         </Container>
       </div>
       <Container className="mt-8">
-        <OfferList />
+        <OfferList query={query} />
       </Container>
     </div>
   );
