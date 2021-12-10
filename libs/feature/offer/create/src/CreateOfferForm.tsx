@@ -16,10 +16,9 @@ export const CreateOfferForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useCreateOfferForm({
-    onSuccess: (result) => {
+    onSuccess: ({ id, offer }) => {
       toast.success('Oferta została pomyślnie opublikowana');
-      console.log({ result });
-      router.push(Route.LANDING_PAGE);
+      router.push(`${Route.OFFER.VIEW}/${id}.${offer.slug}`);
     },
     onError: () => {
       toast.error('Podczas dodawania oferty wystąpił błąd. Spróbuj ponownie!');

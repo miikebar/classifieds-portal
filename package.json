@@ -27,6 +27,7 @@
     "classnames": "^2.3.1",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.3",
+    "date-fns": "^2.27.0",
     "firebase": "^9.6.0",
     "firebase-admin": "^10.0.0",
     "firebase-functions": "^3.16.0",
@@ -43,8 +44,10 @@
     "react-hot-toast": "^2.1.1",
     "react-polymorphic-types": "^2.0.0",
     "regenerator-runtime": "0.13.7",
+    "slugify": "^1.6.3",
     "superstruct": "^0.15.3",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@angular-devkit/schematics": "^13.0.4",
@@ -63,6 +66,7 @@
     "@types/node": "^14.14.33",
     "@types/react": "17.0.30",
     "@types/react-dom": "17.0.9",
+    "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "~4.31.1",
     "@typescript-eslint/parser": "~4.31.1",
     "autoprefixer": "^10.4.0",

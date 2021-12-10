@@ -18,6 +18,7 @@
       "@listic/core/auth": ["libs/core/auth/src/index.ts"],
       "@listic/core/categories": ["libs/core/categories/src/index.ts"],
       "@listic/core/firebase": ["libs/core/firebase/src/index.ts"],
+      "@listic/core/firebase/admin": ["libs/core/firebase/admin/src/index.ts"],
       "@listic/core/offer": ["libs/core/offer/src/index.ts"],
       "@listic/core/schema": ["libs/core/schema/src/index.ts"],
       "@listic/core/user": ["libs/core/user/src/index.ts"],

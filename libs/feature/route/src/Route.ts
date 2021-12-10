@@ -5,6 +5,7 @@ export const Route = {
     SIGN_UP: '/auth/signup',
   },
   OFFER: {
+    VIEW: '/offer',
     CREATE: '/create-offer',
   },
 };

@@ -70,6 +70,31 @@
       },
       "tags": []
     },
+    "core-firebase-admin": {
+      "root": "libs/core/firebase/admin",
+      "sourceRoot": "libs/core/firebase/admin/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/firebase/admin/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/admin"],
+          "options": {
+            "jestConfig": "libs/core/firebase/admin/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "core-offer": {
       "root": "libs/core/offer",
       "sourceRoot": "libs/core/offer/src",

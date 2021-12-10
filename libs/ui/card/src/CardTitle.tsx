@@ -1,3 +1,8 @@
-export const CardTitle: React.FC = ({ children }) => {
-  return <span className="text-xl font-bold">{children}</span>;
+import { ComponentPropsWithoutRef } from 'react';
+
+export const CardTitle: React.FC<ComponentPropsWithoutRef<'span'>> = ({
+  className = '',
+  ...props
+}) => {
+  return <span className={`${className} text-xl font-bold `} {...props} />;
 };

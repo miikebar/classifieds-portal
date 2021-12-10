@@ -5,9 +5,8 @@ import {
   signOut as authSignOut,
   signInWithEmailAndPassword,
   User,
-  UserProfile,
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import {
   createContext,
   useCallback,
@@ -53,8 +52,9 @@ const useProvideAuth = () => {
         name,
         surname,
         email,
-        ...{ phone },
-      } as UserProfile);
+        phone,
+        createdAt: serverTimestamp(),
+      });
     },
     []
   );
