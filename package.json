@@ -42,6 +42,7 @@
     "preact-ssr-prepass": "^1.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-dropzone": "^11.4.2",
     "react-hook-form": "^7.21.0",
     "react-hot-toast": "^2.1.1",
     "react-polymorphic-types": "^2.0.0",

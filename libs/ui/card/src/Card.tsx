@@ -30,7 +30,7 @@ export const Card: PolymorphicForwardRefExoticComponent<
   return (
     <Element
       ref={ref}
-      className="bg-white p-4 rounded-lg shadow-sm lg:p-8"
+      className={`bg-white p-4 rounded-lg shadow-sm lg:p-8 ${className}`}
       {...restProps}
     />
   );

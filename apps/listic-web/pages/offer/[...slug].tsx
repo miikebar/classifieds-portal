@@ -21,7 +21,17 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
   return (
     <div className="flex-1 bg-gray-100">
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
-        <div className="lg:w-3/4">
+        <div className="flex flex-col gap-4 lg:w-3/4">
+          {!!offer.images?.length && (
+            <Card>
+              <div className="aspect-video rounded-md overflow-hidden shadow-md">
+                <img
+                  src={offer.images[0]}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Card>
+          )}
           <Card>
             <span className="text-sm text-gray-500 block mb-1">
               Dodano {format(new Date(offer.createdAt), 'dd.MM.yyyy')}

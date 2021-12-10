@@ -14,6 +14,9 @@ export const CreateOfferForm: React.FC = () => {
     register,
     isPending,
     handleSubmit,
+    dropzone,
+    files,
+    removeFile,
     formState: { errors },
   } = useCreateOfferForm({
     onSuccess: ({ id, offer }) => {
@@ -24,6 +27,24 @@ export const CreateOfferForm: React.FC = () => {
       toast.error('Podczas dodawania oferty wystąpił błąd. Spróbuj ponownie!');
     },
   });
+
+  const renderThumbnails = () => {
+    return files.map((file) => (
+      <div
+        key={file.preview}
+        className="aspect-square rounded-md overflow-hidden shadow-sm relative"
+      >
+        <button
+          type="button"
+          className="absolute top-2 right-2 bg-gray-200 w-6 h-6 grid place-content-center rounded-md"
+          onClick={() => removeFile(file.preview)}
+        >
+          &times;
+        </button>
+        <img src={file.preview} className="w-full h-full object-cover" />
+      </div>
+    ));
+  };
 
   return (
     <form noValidate className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -84,6 +105,19 @@ export const CreateOfferForm: React.FC = () => {
             Dodaj do 15 zdjęć. Pierwsze zostanie użyte jako miniatura ogłoszenia
           </Card.Subtitle>
         </Card.Header>
+        <div
+          {...dropzone.getRootProps({
+            className:
+              'bg-gray-100 px-4 py-8 text-center rounded-md cursor-pointer',
+          })}
+        >
+          <input {...dropzone.getInputProps()} />
+          <p>Kliknij tutaj lub przeciągnij i upuść zdjęcia</p>
+        </div>
+        <div className="mt-4 grid gap-4 lg:grid-cols-5">
+          {renderThumbnails()}
+        </div>
+        {/* <aside style={thumbsContainer}>{thumbs}</aside> */}
       </Card>
       <Card>
         <Card.Header>
