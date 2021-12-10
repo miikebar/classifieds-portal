@@ -11,13 +11,17 @@ const index = client.initIndex(
   process.env.NEXT_PUBLIC_ALGOLIA_OFFERS_INDEX as string
 );
 
-export const useOfferList = () => {
+interface UseOfferListProps {
+  query?: string;
+}
+
+export const useOfferList = ({ query }: UseOfferListProps = {}) => {
   const [data, setData] = useState<OfferSearchIndex[]>([]);
 
   const fetchOffers = useCallback(async () => {
-    const { hits } = await index.search<OfferSearchIndex>('');
+    const { hits } = await index.search<OfferSearchIndex>(query ?? '');
     setData(hits);
-  }, []);
+  }, [query]);
 
   useEffect(() => {
     fetchOffers();
