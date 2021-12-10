@@ -16,16 +16,18 @@ interface UseOfferListProps {
 }
 
 export const useOfferList = ({ query }: UseOfferListProps = {}) => {
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<OfferSearchIndex[]>([]);
 
   const fetchOffers = useCallback(async () => {
     const { hits } = await index.search<OfferSearchIndex>(query ?? '');
     setData(hits);
+    setLoading(false);
   }, [query]);
 
   useEffect(() => {
     fetchOffers();
   }, [fetchOffers]);
 
-  return { data };
+  return { isLoading, data };
 };
