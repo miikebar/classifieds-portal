@@ -8,9 +8,15 @@ import { Collection } from '@listic/core/firebase';
 import { Offer } from '@listic/core/offer';
 import { Timestamp } from 'firebase/firestore';
 import { format } from 'date-fns';
+import { useAuth } from '@listic/core/auth';
+import { useOfferStatusManager } from '@listic/core/offer';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
+import { Route } from '@listic/feature/route';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'owner'> & {
+    id: string;
     createdAt: string;
     updatedAt: string;
     owner: Omit<Offer['owner'], 'createdAt'> & { createdAt: string };
@@ -18,10 +24,81 @@ interface OfferPageProps {
 }
 
 const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
+  const { uid } = useAuth();
+  const router = useRouter();
+  const { isPending, setActive } = useOfferStatusManager(offer.id);
+
+  const onChangeStatus = async () => {
+    await setActive(!offer.active);
+    toast.success('Status ogłoszenia został zaktualizowany');
+    router.push(Route.LANDING_PAGE);
+  };
+
+  const renderSellerInfo = () => {
+    return (
+      <Card>
+        <Card.Header>
+          <Card.Title>O sprzedającym</Card.Title>
+        </Card.Header>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col">
+            <span className="font-bold  text-lg">{offer.owner.name}</span>
+            <span className="text-sm text-gray-500">
+              Na Listic od 10 grudnia 2021
+            </span>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              as="a"
+              href={`tel:${offer.owner.phone}`}
+              variant="ghost"
+              className="flex-1"
+              isDisabled={!offer.owner.phone}
+            >
+              Zadzwoń
+            </Button>
+            <Button className="flex-1">Napisz</Button>
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
+  const renderOfferManagement = () => {
+    return (
+      <Card>
+        <Card.Header>
+          <Card.Title>Zarządzaj ogłoszeniem</Card.Title>
+        </Card.Header>
+        <p className="mb-8">
+          Możesz w każdej chwili edytować swoje ogłoszenie, a także zmienić jego
+          status
+        </p>
+        <div className="flex gap-4">
+          <Button variant="ghost" className="flex-1">
+            Edytuj
+          </Button>
+          <Button
+            isLoading={isPending}
+            className="flex-1"
+            onClick={onChangeStatus}
+          >
+            {offer.active ? 'Zakończ' : 'Przywróć'}
+          </Button>
+        </div>
+      </Card>
+    );
+  };
+
   return (
     <div className="flex-1 bg-gray-100">
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
+          {!offer.active && (
+            <Card className="bg-amber-400">
+              Ta oferta została zakończona przez sprzedawcę
+            </Card>
+          )}
           {!!offer.images?.length && (
             <Card>
               <div className="aspect-video rounded-md overflow-hidden shadow-md">
@@ -52,31 +129,8 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
           </Card>
         </div>
         <div className="lg:w-1/4">
-          <Card>
-            <Card.Header>
-              <Card.Title>O sprzedającym</Card.Title>
-            </Card.Header>
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col">
-                <span className="font-bold  text-lg">{offer.owner.name}</span>
-                <span className="text-sm text-gray-500">
-                  Na Listic od 10 grudnia 2021
-                </span>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  as="a"
-                  href={`tel:${offer.owner.phone}`}
-                  variant="ghost"
-                  className="flex-1"
-                  isDisabled={!offer.owner.phone}
-                >
-                  Zadzwoń
-                </Button>
-                <Button className="flex-1">Napisz</Button>
-              </div>
-            </div>
-          </Card>
+          {uid !== offer.owner.id && renderSellerInfo()}
+          {uid === offer.owner.id && renderOfferManagement()}
         </div>
       </Container>
     </div>
@@ -103,6 +157,7 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
   return {
     props: {
       offer: {
+        id,
         ...data,
         owner: {
           ...data.owner,
