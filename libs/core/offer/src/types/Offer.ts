@@ -5,6 +5,7 @@ import { Timestamp } from 'firebase/firestore';
 export type Offer = CreateOfferData & {
   active: boolean;
   slug: string;
+  images?: string[];
   createdAt: Timestamp | Date;
   updatedAt: Timestamp | Date;
 } & {

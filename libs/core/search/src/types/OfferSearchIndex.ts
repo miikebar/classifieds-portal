@@ -9,6 +9,7 @@ export interface OfferSearchIndex {
   slug: string;
   createdAt: number;
   updatedAt: number;
+  images?: string[];
   owner: {
     id: string;
     name: string;

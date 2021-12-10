@@ -19,5 +19,5 @@ export const createOffer = async (
     updatedAt: serverTimestamp() as unknown as Timestamp,
   };
   const docRef = await addDoc(collection(firestore, Collection.OFFERS), data);
-  return { id: docRef.id, offer: data };
+  return { id: docRef.id, offer: data, docRef };
 };

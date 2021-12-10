@@ -29,7 +29,7 @@ const LandingPage: PageWithLayout = () => {
           </div>
         </Container>
       </div>
-      <Container className="mt-8">
+      <Container className="my-8">
         <OfferList query={query} />
       </Container>
     </div>
