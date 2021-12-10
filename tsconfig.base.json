@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@listic/core-search": ["libs/core/search/src/index.ts"],
       "@listic/core/auth": ["libs/core/auth/src/index.ts"],
       "@listic/core/categories": ["libs/core/categories/src/index.ts"],
       "@listic/core/firebase": ["libs/core/firebase/src/index.ts"],
@@ -29,6 +30,7 @@
       "@listic/feature/offer/create": [
         "libs/feature/offer/create/src/index.ts"
       ],
+      "@listic/feature/offer/list": ["libs/feature/offer/list/src/index.ts"],
       "@listic/feature/route": ["libs/feature/route/src/index.ts"],
       "@listic/feature/search": ["libs/feature/search/src/index.ts"],
       "@listic/ui/button": ["libs/ui/button/src/index.ts"],

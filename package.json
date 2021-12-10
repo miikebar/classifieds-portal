@@ -10,6 +10,7 @@
     "format": "nx format:write --uncommitted",
     "prepare": "husky install",
     "analyze": "cross-env ANALYZE=true nx build listic-web",
+    "release-ports": "npx kill-port 4000 5000 5001 8080 8085 9099 9199",
     "postinstall": "patch-package"
   },
   "lint-staged": {
@@ -24,6 +25,7 @@
     "@nrwl/next": "13.2.3",
     "@reach/auto-id": "^0.16.0",
     "@simondotm/nx-firebase": "^0.3.3",
+    "algoliasearch": "^4.11.0",
     "classnames": "^2.3.1",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.3",

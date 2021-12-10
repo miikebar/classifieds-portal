@@ -141,6 +141,39 @@
       },
       "tags": []
     },
+    "core-search": {
+      "root": "libs/core/search",
+      "sourceRoot": "libs/core/search/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/workspace:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/core/search",
+            "main": "libs/core/search/src/index.ts",
+            "tsConfig": "libs/core/search/tsconfig.lib.json",
+            "assets": ["libs/core/search/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/search/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/search"],
+          "options": {
+            "jestConfig": "libs/core/search/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "core-user": {
       "root": "libs/core/user",
       "sourceRoot": "libs/core/user/src",
@@ -276,6 +309,29 @@
           "outputs": ["coverage/libs/feature/offer/create"],
           "options": {
             "jestConfig": "libs/feature/offer/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "feature-offer-list": {
+      "root": "libs/feature/offer/list",
+      "sourceRoot": "libs/feature/offer/list/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/offer/list/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/offer/list"],
+          "options": {
+            "jestConfig": "libs/feature/offer/list/jest.config.js",
             "passWithNoTests": true
           }
         }

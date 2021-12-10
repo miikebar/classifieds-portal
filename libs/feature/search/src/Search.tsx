@@ -3,6 +3,7 @@ import { SearchIconGroup } from './SearchIconGroup';
 import { ReactComponent as IconSearch } from '@listic/ui/icons/search-solid.svg';
 import { ReactComponent as IconList } from '@listic/ui/icons/list-solid.svg';
 import { ReactComponent as IconMarker } from '@listic/ui/icons/map-marker-alt-solid.svg';
+import { categories } from '@listic/core/categories';
 
 export const Search: React.FC = () => {
   return (
@@ -15,9 +16,15 @@ export const Search: React.FC = () => {
           />
         </SearchIconGroup>
         <SearchIconGroup title="Wybierz kategorię" icon={<IconList />}>
-          <select className="w-full lg:mr-2 lg:-ml-1">
-            <option disabled>Kategoria szukanego przedmiotu</option>
-            <option>A</option>
+          <select defaultValue="default" className="w-full lg:mr-2 lg:-ml-1">
+            <option value="default" disabled>
+              Kategoria szukanego przedmiotu
+            </option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
         </SearchIconGroup>
         <SearchIconGroup title="Gdzie szukasz" icon={<IconMarker />}>
