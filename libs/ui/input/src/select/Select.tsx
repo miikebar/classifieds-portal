@@ -1,14 +1,17 @@
 import React, { ComponentPropsWithoutRef } from 'react';
+import { base, InputProps, variantDark, variantLight } from '..';
+import classes from '../input/Input.module.css';
+import cs from 'classnames';
 import { useFormControl } from '@listic/ui/form';
-import classes from './Input.module.css';
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
+interface SelectProps extends ComponentPropsWithoutRef<'select'> {
+  variant?: InputProps['variant'];
   isInvalid?: boolean;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
-    { id, readOnly, disabled, isInvalid, required = true, ...inputProps },
+    { id, disabled, isInvalid, required = true, variant = 'light', ...props },
     ref
   ) => {
     const control = useFormControl();
@@ -20,16 +23,21 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <input
+      <select
         ref={ref}
-        className={`${classes.root} bg-gray-200 text-black placeholder-gray-800 p-3 outline-none rounded-md border-2 border-transparent transition-all focus:border-amber-400`}
+        className={cs({
+          [classes.root]: true,
+          [base]: true,
+          [variantDark]: variant === 'dark',
+          [variantLight]: variant === 'light',
+        })}
         id={control.inputId ?? id}
         required={control.isRequired ?? required}
         disabled={control.isDisabled ?? disabled}
         data-invalid={control.isInvalid ?? isInvalid}
         data-disabled={control.isDisabled ?? disabled}
         {...getHelperAriaProps()}
-        {...inputProps}
+        {...props}
       />
     );
   }

@@ -44,7 +44,11 @@ export const Navbar: React.FC = () => {
         )}
         {user && (
           <div className="flex gap-4 items-center">
-            <Button leftIcon={<IconPlus />}>Dodaj ogłoszenie</Button>
+            <Link passHref href={Route.OFFER.CREATE}>
+              <Button as="a" leftIcon={<IconPlus />}>
+                Dodaj ogłoszenie
+              </Button>
+            </Link>
             <span className="cursor-pointer" onClick={signOut}>
               {user.name} {user.surname}
             </span>

@@ -6,8 +6,10 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { AuthContainer } from '../container/AuthContainer';
 import { useSignUpForm } from './useSignUpForm';
+import { useRouter } from 'next/router';
 
 export const AuthSignUpForm: React.FC = () => {
+  const router = useRouter();
   const {
     isPending,
     register,
@@ -16,6 +18,7 @@ export const AuthSignUpForm: React.FC = () => {
   } = useSignUpForm({
     onSuccess: () => {
       toast.success('Pomyślnie utworzono nowe konto');
+      router.push(Route.LANDING_PAGE);
     },
     onError: () => {
       toast.error('Podczas tworzenia konta wystąpił błąd. Spróbuj ponownie!');

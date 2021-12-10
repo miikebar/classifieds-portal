@@ -24,6 +24,29 @@
         }
       }
     },
+    "core-categories": {
+      "root": "libs/core/categories",
+      "sourceRoot": "libs/core/categories/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/categories/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/categories"],
+          "options": {
+            "jestConfig": "libs/core/categories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "core-firebase": {
       "root": "libs/core/firebase",
       "sourceRoot": "libs/core/firebase/src",
@@ -46,6 +69,29 @@
         }
       },
       "tags": []
+    },
+    "core-offer": {
+      "root": "libs/core/offer",
+      "sourceRoot": "libs/core/offer/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/offer/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/offer"],
+          "options": {
+            "jestConfig": "libs/core/offer/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     },
     "core-schema": {
       "root": "libs/core/schema",
@@ -180,6 +226,31 @@
           "outputs": ["coverage/libs/feature/navbar"],
           "options": {
             "jestConfig": "libs/feature/navbar/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "feature-offer-create": {
+      "root": "libs/feature/offer/create",
+      "sourceRoot": "libs/feature/offer/create/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/feature/offer/create/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/offer/create"],
+          "options": {
+            "jestConfig": "libs/feature/offer/create/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -400,6 +471,29 @@
           "outputs": ["coverage/libs/ui/button"],
           "options": {
             "jestConfig": "libs/ui/button/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-card": {
+      "root": "libs/ui/card",
+      "sourceRoot": "libs/ui/card/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/card/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/card"],
+          "options": {
+            "jestConfig": "libs/ui/card/jest.config.js",
             "passWithNoTests": true
           }
         }
