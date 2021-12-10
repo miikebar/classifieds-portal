@@ -6,6 +6,8 @@ import { createOffer } from '@listic/core/offer';
 import { useUserProfile } from '@listic/core/user';
 import { useAuth } from '@listic/core/auth';
 
+type Awaited<T> = T extends Promise<infer R> ? R : never;
+
 interface UseCreateOfferFormProps {
   onSuccess?(result: Awaited<ReturnType<typeof createOffer>>): void;
   onError?(error: Error): void;
