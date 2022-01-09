@@ -6,16 +6,6 @@
     "rules": "apps/listic-firebase/firestore.rules",
     "indexes": "apps/listic-firebase/firestore.indexes.json"
   },
-  "hosting": {
-    "public": "apps/listic-firebase/public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
   "storage": {
     "rules": "apps/listic-firebase/storage.rules"
   },
