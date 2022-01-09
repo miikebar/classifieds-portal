@@ -1,7 +1,7 @@
 import { Document } from '@listic/core-firebase-utils';
 import { useAuth } from '@listic/react/auth/core';
 import { useCallback, useEffect, useState } from 'react';
-import type { UserProfile } from '..';
+import type { UserProfile } from '@listic/core-user-types';
 
 export const useUserProfile = () => {
   const { uid, isAuthenticated, isProfileCreationPending } = useAuth();

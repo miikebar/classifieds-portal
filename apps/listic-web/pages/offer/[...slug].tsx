@@ -1,9 +1,12 @@
 import { Collection } from '@listic/core-firebase-utils';
 import { adminFirestore } from '@listic/core/firebase/admin';
-import { Offer, useOfferStatusManager } from '@listic/core/offer';
+import { useOfferStatusManager } from '@listic/core/offer';
+import type { Offer } from '@listic/feature-offer-types';
+import { findChatID } from '@listic/feature/chat/utils';
 import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
 import { Route } from '@listic/feature/route';
 import { useAuth } from '@listic/react/auth/core';
+import { useCreateChatRoom } from '@listic/react/chat/core';
 import { Button } from '@listic/ui/button';
 import { Card } from '@listic/ui/card';
 import { Container } from '@listic/ui/container';
@@ -23,14 +26,33 @@ interface OfferPageProps {
 }
 
 const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
-  const { uid } = useAuth();
+  const { uid, isAuthenticated } = useAuth();
   const router = useRouter();
   const { isPending, setActive } = useOfferStatusManager(offer.id);
+  const createChatRoom = useCreateChatRoom();
 
   const onChangeStatus = async () => {
-    await setActive(!offer.active);
+    await setActive(!offer.isActive);
     toast.success('Status ogłoszenia został zaktualizowany');
     router.push(Route.LANDING_PAGE);
+  };
+
+  const onChatClick = async () => {
+    if (!isAuthenticated) {
+      return router.push(Route.AUTH.SIGN_IN);
+    }
+
+    let chatID = await findChatID({
+      offerId: offer.id,
+      userId: uid,
+    });
+
+    if (!chatID) {
+      const chatRoom = await createChatRoom({ userId: uid, offerId: offer.id });
+      chatID = chatRoom.data.id;
+    }
+
+    console.log({ chatID });
   };
 
   const renderSellerInfo = () => {
@@ -56,7 +78,9 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
             >
               Zadzwoń
             </Button>
-            <Button className="flex-1">Napisz</Button>
+            <Button className="flex-1" onClick={onChatClick}>
+              Napisz
+            </Button>
           </div>
         </div>
       </Card>
@@ -82,7 +106,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
             className="flex-1"
             onClick={onChangeStatus}
           >
-            {offer.active ? 'Zakończ' : 'Przywróć'}
+            {offer.isActive ? 'Zakończ' : 'Przywróć'}
           </Button>
         </div>
       </Card>
@@ -93,7 +117,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
     <div className="flex-1 bg-gray-100">
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
-          {!offer.active && (
+          {!offer.isActive && (
             <Card className="bg-amber-400">
               Ta oferta została zakończona przez sprzedawcę
             </Card>

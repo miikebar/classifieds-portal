@@ -5,7 +5,7 @@ export interface OfferSearchIndex {
   category: string;
   description: string;
   price: number;
-  active: boolean;
+  isActive: boolean;
   slug: string;
   createdAt: number;
   updatedAt: number;

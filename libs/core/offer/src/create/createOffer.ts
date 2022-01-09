@@ -1,6 +1,6 @@
 import { Collection } from '@listic/core-firebase-utils';
 import type { Timestamp } from 'firebase/firestore';
-import { Offer } from '../types/Offer';
+import { Offer } from '@listic/feature-offer-types';
 
 export const createOffer = async (
   offer: Omit<Offer, 'active' | 'createdAt' | 'updatedAt' | 'slug'>
@@ -18,7 +18,7 @@ export const createOffer = async (
 
   const data: Offer = {
     ...offer,
-    active: true,
+    isActive: true,
     slug: slugify(offer.name, { lower: true, strict: true }),
     createdAt: serverTimestamp() as unknown as Timestamp,
     updatedAt: serverTimestamp() as unknown as Timestamp,

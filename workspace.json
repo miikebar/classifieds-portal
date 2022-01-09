@@ -162,6 +162,29 @@
       },
       "tags": []
     },
+    "core-firebase-functions": {
+      "root": "libs/core/firebase/functions",
+      "sourceRoot": "libs/core/firebase/functions/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/functions/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/functions"],
+          "options": {
+            "jestConfig": "libs/core/firebase/functions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "core-firebase-storage": {
       "root": "libs/core/firebase/storage",
       "sourceRoot": "libs/core/firebase/storage/src",
@@ -191,12 +214,13 @@
       "projectType": "library",
       "targets": {
         "build": {
-          "executor": "@nrwl/workspace:tsc",
+          "executor": "@nrwl/node:package",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/core/firebase/utils",
-            "main": "libs/core/firebase/utils/src/index.ts",
             "tsConfig": "libs/core/firebase/utils/tsconfig.lib.json",
+            "packageJson": "libs/core/firebase/utils/package.json",
+            "main": "libs/core/firebase/utils/src/index.ts",
             "assets": ["libs/core/firebase/utils/*.md"]
           }
         },
@@ -343,6 +367,40 @@
         }
       }
     },
+    "core-user-types": {
+      "root": "libs/core/user/types",
+      "sourceRoot": "libs/core/user/types/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/core/user/types",
+            "tsConfig": "libs/core/user/types/tsconfig.lib.json",
+            "packageJson": "libs/core/user/types/package.json",
+            "main": "libs/core/user/types/src/index.ts",
+            "assets": ["libs/core/user/types/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/user/types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/user/types"],
+          "options": {
+            "jestConfig": "libs/core/user/types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "feature-auth": {
       "root": "libs/feature/auth",
       "sourceRoot": "libs/feature/auth/src",
@@ -365,6 +423,96 @@
           }
         }
       }
+    },
+    "feature-chat-core": {
+      "root": "libs/feature/chat/core",
+      "sourceRoot": "libs/feature/chat/core/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/workspace:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/feature/chat/core",
+            "main": "libs/feature/chat/core/src/index.ts",
+            "tsConfig": "libs/feature/chat/core/tsconfig.lib.json",
+            "assets": ["libs/feature/chat/core/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/chat/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/chat/core"],
+          "options": {
+            "jestConfig": "libs/feature/chat/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "feature-chat-types": {
+      "root": "libs/feature/chat/types",
+      "sourceRoot": "libs/feature/chat/types/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/feature/chat/types",
+            "tsConfig": "libs/feature/chat/types/tsconfig.lib.json",
+            "packageJson": "libs/feature/chat/types/package.json",
+            "main": "libs/feature/chat/types/src/index.ts",
+            "assets": ["libs/feature/chat/types/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/chat/types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/chat/types"],
+          "options": {
+            "jestConfig": "libs/feature/chat/types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "feature-chat-utils": {
+      "root": "libs/feature/chat/utils",
+      "sourceRoot": "libs/feature/chat/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/chat/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/chat/utils"],
+          "options": {
+            "jestConfig": "libs/feature/chat/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "feature-footer": {
       "root": "libs/feature/footer",
@@ -482,6 +630,40 @@
           }
         }
       }
+    },
+    "feature-offer-types": {
+      "root": "libs/feature/offer/types",
+      "sourceRoot": "libs/feature/offer/types/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/feature/offer/types",
+            "tsConfig": "libs/feature/offer/types/tsconfig.lib.json",
+            "packageJson": "libs/feature/offer/types/package.json",
+            "main": "libs/feature/offer/types/src/index.ts",
+            "assets": ["libs/feature/offer/types/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/feature/offer/types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/offer/types"],
+          "options": {
+            "jestConfig": "libs/feature/offer/types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "feature-route": {
       "root": "libs/feature/route",
@@ -698,6 +880,54 @@
           "outputs": ["coverage/libs/react/auth/core"],
           "options": {
             "jestConfig": "libs/react/auth/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-chat-core": {
+      "root": "libs/react/chat/core",
+      "sourceRoot": "libs/react/chat/core/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react/chat/core/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/chat/core"],
+          "options": {
+            "jestConfig": "libs/react/chat/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-firebase-functions": {
+      "root": "libs/react/firebase/functions",
+      "sourceRoot": "libs/react/firebase/functions/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/react/firebase/functions/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/firebase/functions"],
+          "options": {
+            "jestConfig": "libs/react/firebase/functions/jest.config.js",
             "passWithNoTests": true
           }
         }
