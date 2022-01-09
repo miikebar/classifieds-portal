@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md}": [
-      "yarn format"
+      "npm run format"
     ]
   },
   "dependencies": {

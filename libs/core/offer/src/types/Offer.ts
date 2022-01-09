@@ -1,6 +1,6 @@
 import { CreateOfferData } from '../create/CreateOfferSchema';
 import type { UserProfile } from '@listic/core/user';
-import { Timestamp } from 'firebase/firestore';
+import type { Timestamp } from 'firebase/firestore';
 
 export type Offer = CreateOfferData & {
   active: boolean;

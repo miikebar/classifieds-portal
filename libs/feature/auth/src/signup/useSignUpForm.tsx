@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { SignUpData, SignUpSchema } from '@listic/core/auth';
 import { superstructResolver } from '@hookform/resolvers/superstruct/dist/superstruct';
 import { useCallback, useMemo, useState } from 'react';
-import { useAuth } from '@listic/core/auth';
+import { useAuth } from '@listic/react/auth/core';
 
 interface UseSignUpFormProps {
   onSuccess?(): void;

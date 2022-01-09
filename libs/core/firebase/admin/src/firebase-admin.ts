@@ -17,4 +17,4 @@ export const app = initializeApp(
   uuid()
 );
 
-export const firestore = getFirestore(app);
+export const adminFirestore = getFirestore(app);

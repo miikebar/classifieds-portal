@@ -1,18 +1,17 @@
+import { Collection } from '@listic/core-firebase-utils';
+import { adminFirestore } from '@listic/core/firebase/admin';
+import { Offer, useOfferStatusManager } from '@listic/core/offer';
 import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
+import { Route } from '@listic/feature/route';
+import { useAuth } from '@listic/react/auth/core';
 import { Button } from '@listic/ui/button';
 import { Card } from '@listic/ui/card';
 import { Container } from '@listic/ui/container';
-import type { GetStaticPaths, GetStaticProps } from 'next';
-import { firestore } from '@listic/core/firebase/admin';
-import { Collection } from '@listic/core/firebase';
-import { Offer } from '@listic/core/offer';
-import { Timestamp } from 'firebase/firestore';
 import { format } from 'date-fns';
-import { useAuth } from '@listic/core/auth';
-import { useOfferStatusManager } from '@listic/core/offer';
+import type { Timestamp } from 'firebase/firestore';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
-import { Route } from '@listic/feature/route';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'owner'> & {
@@ -95,7 +94,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
           {!offer.active && (
-            <Card className="bg-amber-400">
+            <Card className="bg-yellow-400">
               Ta oferta została zakończona przez sprzedawcę
             </Card>
           )}
@@ -143,7 +142,10 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
   const [slugParam] = ctx.params.slug as string;
   const [id, slug] = slugParam.split('.');
 
-  const offer = await firestore.collection(Collection.OFFERS).doc(id).get();
+  const offer = await adminFirestore
+    .collection(Collection.OFFERS)
+    .doc(id)
+    .get();
 
   if (!offer.exists) {
     return {

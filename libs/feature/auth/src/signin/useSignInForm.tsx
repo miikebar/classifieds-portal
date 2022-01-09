@@ -1,5 +1,5 @@
 import { superstructResolver } from '@hookform/resolvers/superstruct/dist/superstruct';
-import { useAuth } from '@listic/core/auth';
+import { useAuth } from '@listic/react/auth/core';
 import { SignInData, SignInSchema } from '@listic/core/auth';
 import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';

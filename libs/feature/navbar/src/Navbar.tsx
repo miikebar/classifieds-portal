@@ -5,7 +5,7 @@ import { Route } from '@listic/feature/route';
 import { Button, IconButton } from '@listic/ui/button';
 import { useOffCanvas } from '@listic/ui/off-canvas';
 import { ReactComponent as BarsIcon } from '@listic/ui/icons/bars-solid.svg';
-import { useAuth } from '@listic/core/auth';
+import { useAuth } from '@listic/react/auth/core';
 import { useUserProfile } from '@listic/core/user';
 import { ReactComponent as IconPlus } from '@listic/ui/icons/plus-solid.svg';
 

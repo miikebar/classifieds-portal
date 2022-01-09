@@ -1,6 +1,5 @@
+import { Collection } from '@listic/core-firebase-utils';
 import { useCallback, useState } from 'react';
-import { Collection, firestore } from '@listic/core/firebase';
-import { updateDoc, doc } from 'firebase/firestore';
 import { Offer } from '..';
 
 export const useOfferStatusManager = (offerId: string) => {
@@ -10,7 +9,14 @@ export const useOfferStatusManager = (offerId: string) => {
     async (isActive: boolean) => {
       try {
         setPending(true);
-        const offerDoc = doc(firestore, Collection.OFFERS, offerId);
+        const [firestoreLite, doc, updateDoc] = await Promise.all([
+          import('@listic/core/firebase/firestore-lite').then(
+            (m) => m.firestoreLite
+          ),
+          import('firebase/firestore/lite').then((m) => m.doc),
+          import('firebase/firestore/lite').then((m) => m.updateDoc),
+        ]);
+        const offerDoc = doc(firestoreLite, Collection.OFFERS, offerId);
         await updateDoc(offerDoc, { active: isActive } as Partial<Offer>);
       } catch (error) {
         console.error(error);

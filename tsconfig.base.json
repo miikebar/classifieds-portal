@@ -15,13 +15,25 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@listic/core-firebase-utils": ["libs/core/firebase/utils/src/index.ts"],
       "@listic/core-search": ["libs/core/search/src/index.ts"],
       "@listic/core/auth": ["libs/core/auth/src/index.ts"],
       "@listic/core/categories": ["libs/core/categories/src/index.ts"],
-      "@listic/core/firebase": ["libs/core/firebase/src/index.ts"],
       "@listic/core/firebase/admin": ["libs/core/firebase/admin/src/index.ts"],
+      "@listic/core/firebase/app": ["libs/core/firebase/app/src/index.ts"],
+      "@listic/core/firebase/auth": ["libs/core/firebase/auth/src/index.ts"],
+      "@listic/core/firebase/firestore": [
+        "libs/core/firebase/firestore/src/index.ts"
+      ],
+      "@listic/core/firebase/firestore-lite": [
+        "libs/core/firebase/firestore-lite/src/index.ts"
+      ],
+      "@listic/core/firebase/storage": [
+        "libs/core/firebase/storage/src/index.ts"
+      ],
       "@listic/core/offer": ["libs/core/offer/src/index.ts"],
       "@listic/core/schema": ["libs/core/schema/src/index.ts"],
+      "@listic/core/types": ["libs/core/types/src/index.ts"],
       "@listic/core/user": ["libs/core/user/src/index.ts"],
       "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
       "@listic/feature/footer": ["libs/feature/footer/src/index.ts"],
@@ -33,6 +45,7 @@
       "@listic/feature/offer/list": ["libs/feature/offer/list/src/index.ts"],
       "@listic/feature/route": ["libs/feature/route/src/index.ts"],
       "@listic/feature/search": ["libs/feature/search/src/index.ts"],
+      "@listic/react/auth/core": ["libs/react/auth/core/src/index.ts"],
       "@listic/ui/button": ["libs/ui/button/src/index.ts"],
       "@listic/ui/card": ["libs/ui/card/src/index.ts"],
       "@listic/ui/container": ["libs/ui/container/src/index.ts"],

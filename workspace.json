@@ -47,42 +47,16 @@
         }
       }
     },
-    "core-firebase": {
-      "root": "libs/core/firebase",
-      "sourceRoot": "libs/core/firebase/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/core/firebase/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/core/firebase"],
-          "options": {
-            "jestConfig": "libs/core/firebase/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
     "core-firebase-admin": {
       "root": "libs/core/firebase/admin",
       "sourceRoot": "libs/core/firebase/admin/src",
       "projectType": "library",
-      "tags": [],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "libs/core/firebase/admin/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/core/firebase/admin/**/*.ts"]
           }
         },
         "test": {
@@ -93,7 +67,156 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
+    },
+    "core-firebase-app": {
+      "root": "libs/core/firebase/app",
+      "sourceRoot": "libs/core/firebase/app/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/app/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/app"],
+          "options": {
+            "jestConfig": "libs/core/firebase/app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-firebase-auth": {
+      "root": "libs/core/firebase/auth",
+      "sourceRoot": "libs/core/firebase/auth/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/auth/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/auth"],
+          "options": {
+            "jestConfig": "libs/core/firebase/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-firebase-firestore": {
+      "root": "libs/core/firebase/firestore",
+      "sourceRoot": "libs/core/firebase/firestore/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/firestore/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/firestore"],
+          "options": {
+            "jestConfig": "libs/core/firebase/firestore/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-firebase-firestore-lite": {
+      "root": "libs/core/firebase/firestore-lite",
+      "sourceRoot": "libs/core/firebase/firestore-lite/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/firestore-lite/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/firestore-lite"],
+          "options": {
+            "jestConfig": "libs/core/firebase/firestore-lite/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-firebase-storage": {
+      "root": "libs/core/firebase/storage",
+      "sourceRoot": "libs/core/firebase/storage/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/storage/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/storage"],
+          "options": {
+            "jestConfig": "libs/core/firebase/storage/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-firebase-utils": {
+      "root": "libs/core/firebase/utils",
+      "sourceRoot": "libs/core/firebase/utils/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/workspace:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/core/firebase/utils",
+            "main": "libs/core/firebase/utils/src/index.ts",
+            "tsConfig": "libs/core/firebase/utils/tsconfig.lib.json",
+            "assets": ["libs/core/firebase/utils/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/firebase/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/firebase/utils"],
+          "options": {
+            "jestConfig": "libs/core/firebase/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "core-offer": {
       "root": "libs/core/offer",
@@ -168,6 +291,29 @@
           "outputs": ["coverage/libs/core/search"],
           "options": {
             "jestConfig": "libs/core/search/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "core-types": {
+      "root": "libs/core/types",
+      "sourceRoot": "libs/core/types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/types"],
+          "options": {
+            "jestConfig": "libs/core/types/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -533,6 +679,29 @@
       },
       "tags": [],
       "implicitDependencies": ["listic-web"]
+    },
+    "react-auth-core": {
+      "root": "libs/react/auth/core",
+      "sourceRoot": "libs/react/auth/core/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react/auth/core/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/auth/core"],
+          "options": {
+            "jestConfig": "libs/react/auth/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     },
     "ui-button": {
       "root": "libs/ui/button",

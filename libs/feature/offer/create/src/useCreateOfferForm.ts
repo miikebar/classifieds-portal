@@ -1,19 +1,16 @@
 import { superstructResolver } from '@hookform/resolvers/superstruct/dist/superstruct';
-import { useAuth } from '@listic/core/auth';
-import { StorageLocation, storage } from '@listic/core/firebase';
+import { Storage } from '@listic/core-firebase-utils';
 import {
   createOffer,
   CreateOfferData,
   CreateOfferSchema,
 } from '@listic/core/offer';
+import type { Awaited } from '@listic/core/types';
 import { useUserProfile } from '@listic/core/user';
-import { updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useAuth } from '@listic/react/auth/core';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
-
-type Awaited<T> = T extends Promise<infer R> ? R : never;
 
 interface UseCreateOfferFormProps {
   onSuccess?(result: Awaited<ReturnType<typeof createOffer>>): void;
@@ -58,9 +55,17 @@ export const useCreateOfferForm = ({
   }, []);
 
   const uploadFile = useCallback(async (offerId: string, file: File) => {
+    const [firebaseStorage, ref, uploadBytes, getDownloadURL] =
+      await Promise.all([
+        import('@listic/core/firebase/storage').then((m) => m.firebaseStorage),
+        import('firebase/storage').then((m) => m.ref),
+        import('firebase/storage').then((m) => m.uploadBytes),
+        import('firebase/storage').then((m) => m.getDownloadURL),
+      ]);
+
     const storageRef = ref(
-      storage,
-      `${StorageLocation.OFFERS}/${offerId}/${file.name}`
+      firebaseStorage,
+      `${Storage.OFFERS}/${offerId}/${file.name}`
     );
     const result = await uploadBytes(storageRef, file);
     return getDownloadURL(result.ref);
@@ -81,6 +86,9 @@ export const useCreateOfferForm = ({
 
       try {
         setPending(true);
+        const updateDoc = await import('firebase/firestore/lite').then(
+          (m) => m.updateDoc
+        );
         const result = await createOffer({
           ...data,
           owner: { ...user, id: uid },
