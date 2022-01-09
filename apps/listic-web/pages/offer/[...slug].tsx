@@ -94,7 +94,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
           {!offer.active && (
-            <Card className="bg-yellow-400">
+            <Card className="bg-amber-400">
               Ta oferta została zakończona przez sprzedawcę
             </Card>
           )}

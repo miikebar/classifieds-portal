@@ -1,10 +1,17 @@
 import { app } from '@listic/core/firebase/app';
-import { Auth, connectAuthEmulator, getAuth } from 'firebase/auth';
+import {
+  Auth,
+  connectAuthEmulator,
+  initializeAuth,
+  browserLocalPersistence,
+} from 'firebase/auth';
 
 export let firebaseAuth = {} as Auth;
 
 if (typeof window !== 'undefined') {
-  firebaseAuth = getAuth(app);
+  firebaseAuth = initializeAuth(app, {
+    persistence: browserLocalPersistence,
+  });
 
   if (
     process.env.NEXT_PUBLIC_FIREBASE_EMULATORS_ENABLED === 'true' &&
