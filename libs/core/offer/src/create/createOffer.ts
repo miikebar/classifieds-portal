@@ -1,12 +1,11 @@
 import { Collection } from '@listic/core-firebase-utils';
 import type { Timestamp } from 'firebase/firestore';
-import slugify from 'slugify';
 import { Offer } from '../types/Offer';
 
 export const createOffer = async (
   offer: Omit<Offer, 'active' | 'createdAt' | 'updatedAt' | 'slug'>
 ) => {
-  const [firestoreLite, serverTimestamp, addDoc, collection] =
+  const [firestoreLite, serverTimestamp, addDoc, collection, slugify] =
     await Promise.all([
       import('@listic/core/firebase/firestore-lite').then(
         (m) => m.firestoreLite
@@ -14,6 +13,7 @@ export const createOffer = async (
       import('firebase/firestore/lite').then((m) => m.serverTimestamp),
       import('firebase/firestore/lite').then((m) => m.addDoc),
       import('firebase/firestore/lite').then((m) => m.collection),
+      import('slugify').then((m) => m.default),
     ]);
 
   const data: Offer = {
