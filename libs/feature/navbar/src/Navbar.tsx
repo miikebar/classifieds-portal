@@ -43,7 +43,10 @@ export const Navbar: React.FC = () => {
           </div>
         )}
         {user && (
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-6 items-center">
+            <Link passHref href={Route.CHAT}>
+              <a>Wiadomości</a>
+            </Link>
             <Link passHref href={Route.OFFER.CREATE}>
               <Button as="a" leftIcon={<IconPlus />}>
                 Dodaj ogłoszenie
