@@ -1,6 +1,6 @@
 import { Collection } from '@listic/core-firebase-utils';
 import { useCallback, useState } from 'react';
-import { Offer } from '..';
+import { Offer } from '@listic/feature-offer-types';
 
 export const useOfferStatusManager = (offerId: string) => {
   const [isPending, setPending] = useState(false);

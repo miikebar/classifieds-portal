@@ -3,7 +3,7 @@ import type { Timestamp } from 'firebase/firestore';
 import { Offer } from '@listic/feature-offer-types';
 
 export const createOffer = async (
-  offer: Omit<Offer, 'active' | 'createdAt' | 'updatedAt' | 'slug'>
+  offer: Omit<Offer, 'isActive' | 'createdAt' | 'updatedAt' | 'slug'>
 ) => {
   const [firestoreLite, serverTimestamp, addDoc, collection, slugify] =
     await Promise.all([
