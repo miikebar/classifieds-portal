@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      height: {
+        chat: 'calc(100vh - 64px - 96px - 16px)',
+      },
       maxWidth: {
         container: '1320px',
         heroText: '672px',

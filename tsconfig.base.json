@@ -43,6 +43,7 @@
       "@listic/feature-chat-types": ["libs/feature/chat/types/src/index.ts"],
       "@listic/feature-offer-types": ["libs/feature/offer/types/src/index.ts"],
       "@listic/feature/auth": ["libs/feature/auth/src/index.ts"],
+      "@listic/feature/chat/ui": ["libs/feature/chat/ui/src/index.ts"],
       "@listic/feature/chat/utils": ["libs/feature/chat/utils/src/index.ts"],
       "@listic/feature/footer": ["libs/feature/footer/src/index.ts"],
       "@listic/feature/layout": ["libs/feature/layout/src/index.ts"],
@@ -58,6 +59,7 @@
       "@listic/react/firebase/functions": [
         "libs/react/firebase/functions/src/index.ts"
       ],
+      "@listic/react/utils": ["libs/react/utils/src/index.ts"],
       "@listic/ui/button": ["libs/ui/button/src/index.ts"],
       "@listic/ui/card": ["libs/ui/card/src/index.ts"],
       "@listic/ui/container": ["libs/ui/container/src/index.ts"],

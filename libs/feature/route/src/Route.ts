@@ -8,4 +8,5 @@ export const Route = {
     VIEW: '/offer',
     CREATE: '/create-offer',
   },
+  CHAT: '/chat',
 };

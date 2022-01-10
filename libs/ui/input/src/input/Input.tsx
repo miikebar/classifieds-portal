@@ -53,4 +53,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 export const variantDark = 'bg-gray-200';
 export const variantLight = 'bg-gray-100';
 export const base =
-  'w-full text-black placeholder-gray-800 p-3 outline-none rounded-md border-2 border-transparent transition-all focus:border-amber-400';
+  'w-full text-black placeholder-gray-500 p-3 outline-none rounded-md border-2 border-transparent transition-all focus:border-amber-400';

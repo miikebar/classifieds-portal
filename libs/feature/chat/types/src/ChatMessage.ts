@@ -1,7 +1,7 @@
-import type { Timestamp } from 'firebase/firestore';
+import type { FieldValue, Timestamp } from 'firebase/firestore';
 
 export interface ChatMessage {
   authorId: string;
   content: string;
-  createdAt: Date | Timestamp;
+  createdAt: Date | Timestamp | FieldValue;
 }

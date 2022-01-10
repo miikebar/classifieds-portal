@@ -14,6 +14,7 @@ import { format } from 'date-fns';
 import type { Timestamp } from 'firebase/firestore';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface OfferPageProps {
@@ -30,6 +31,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
   const router = useRouter();
   const { isPending, setActive } = useOfferStatusManager(offer.id);
   const createChatRoom = useCreateChatRoom();
+  const [isChatPending, setChatPending] = useState(false);
 
   const onChangeStatus = async () => {
     await setActive(!offer.isActive);
@@ -42,17 +44,18 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
       return router.push(Route.AUTH.SIGN_IN);
     }
 
-    let chatID = await findChatID({
+    setChatPending(true);
+    let chatId = await findChatID({
       offerId: offer.id,
       userId: uid,
     });
 
-    if (!chatID) {
+    if (!chatId) {
       const chatRoom = await createChatRoom({ userId: uid, offerId: offer.id });
-      chatID = chatRoom.data.id;
+      chatId = chatRoom.data.id;
     }
 
-    console.log({ chatID });
+    router.push(`${Route.CHAT}/${chatId}`);
   };
 
   const renderSellerInfo = () => {
@@ -78,7 +81,11 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
             >
               Zadzwoń
             </Button>
-            <Button className="flex-1" onClick={onChatClick}>
+            <Button
+              isLoading={isChatPending}
+              className="flex-1"
+              onClick={onChatClick}
+            >
               Napisz
             </Button>
           </div>

@@ -4,7 +4,7 @@ import { base, InputProps, variantDark, variantLight } from '..';
 import classes from '../input/Input.module.css';
 import { useFormControl } from '@listic/ui/form';
 
-interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
+export interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
   variant?: InputProps['variant'];
   isInvalid?: boolean;
 }
