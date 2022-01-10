@@ -12,4 +12,6 @@ export interface Offer {
   createdAt: Timestamp | Date;
   updatedAt: Timestamp | Date;
   owner: UserProfile & { id: string };
+  isPromoted?: boolean;
+  promoteExpires: Timestamp | Date;
 }

@@ -20,7 +20,9 @@ export const CreateOfferForm: React.FC = () => {
     formState: { errors },
   } = useCreateOfferForm({
     onSuccess: ({ id, offer }) => {
-      toast.success('Oferta została pomyślnie opublikowana');
+      toast.success(
+        'Sukces! Za chwile zostaniesz przekierowany na stronę ze swoją ofertą!'
+      );
       router.push(`${Route.OFFER.VIEW}/${id}.${offer.slug}`);
     },
     onError: () => {

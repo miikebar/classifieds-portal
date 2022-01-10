@@ -46,9 +46,11 @@
     "react-dropzone": "^11.4.2",
     "react-hook-form": "^7.21.0",
     "react-hot-toast": "^2.1.1",
+    "react-loading-skeleton": "^3.0.2",
     "react-polymorphic-types": "^2.0.0",
     "regenerator-runtime": "0.13.7",
     "slugify": "^1.6.3",
+    "stripe": "^8.195.0",
     "superstruct": "^0.15.3",
     "tslib": "^2.0.0",
     "uuid": "^8.3.2"

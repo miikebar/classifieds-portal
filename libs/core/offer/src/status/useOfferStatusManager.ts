@@ -2,11 +2,15 @@ import { Collection } from '@listic/core-firebase-utils';
 import { useCallback, useState } from 'react';
 import { Offer } from '@listic/feature-offer-types';
 
-export const useOfferStatusManager = (offerId: string) => {
+export const useOfferStatusManager = (offerId: string | undefined) => {
   const [isPending, setPending] = useState(false);
 
   const setActive = useCallback(
     async (isActive: boolean) => {
+      if (!offerId) {
+        return;
+      }
+
       try {
         setPending(true);
         const [firestoreLite, doc, updateDoc] = await Promise.all([

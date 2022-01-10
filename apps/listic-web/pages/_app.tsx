@@ -1,5 +1,6 @@
 import '../styles/global.css';
 import 'tailwindcss/tailwind.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import type { AppProps } from 'next/app';
 import type { PageWithLayout } from '@listic/feature/layout';
