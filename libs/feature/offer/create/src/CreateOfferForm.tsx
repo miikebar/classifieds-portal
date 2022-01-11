@@ -7,7 +7,7 @@ import { useCreateOfferForm } from './useCreateOfferForm';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Route } from '@listic/feature/route';
-import { LocationInput } from 'libs/feature/search/src/LocationInput';
+import { LocationInput } from '@listic/feature/search';
 
 export const CreateOfferForm: React.FC = () => {
   const router = useRouter();
@@ -16,6 +16,7 @@ export const CreateOfferForm: React.FC = () => {
     setValue,
     isPending,
     handleSubmit,
+    hasImageError,
     dropzone,
     files,
     removeFile,
@@ -123,19 +124,23 @@ export const CreateOfferForm: React.FC = () => {
             Dodaj do 15 zdjęć. Pierwsze zostanie użyte jako miniatura ogłoszenia
           </Card.Subtitle>
         </Card.Header>
-        <div
-          {...dropzone.getRootProps({
-            className:
-              'bg-gray-100 px-4 py-8 text-center rounded-md cursor-pointer',
-          })}
-        >
-          <input {...dropzone.getInputProps()} />
-          <p>Kliknij tutaj lub przeciągnij i upuść zdjęcia</p>
-        </div>
-        <div className="mt-4 grid gap-4 lg:grid-cols-5">
-          {renderThumbnails()}
-        </div>
-        {/* <aside style={thumbsContainer}>{thumbs}</aside> */}
+        <FormControl isInvalid={hasImageError}>
+          <div
+            {...dropzone.getRootProps({
+              className:
+                'bg-gray-100 px-4 py-8 text-center rounded-md cursor-pointer',
+            })}
+          >
+            <input {...dropzone.getInputProps()} />
+            <p>Kliknij tutaj lub przeciągnij i upuść zdjęcia</p>
+          </div>
+          <div className="mt-4 grid gap-4 lg:grid-cols-5">
+            {renderThumbnails()}
+          </div>
+          <FormErrorMessage>
+            Musisz dodać przynajmniej jedno zdjęcie!
+          </FormErrorMessage>
+        </FormControl>
       </Card>
       <Card>
         <Card.Header>

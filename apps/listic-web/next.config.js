@@ -12,6 +12,9 @@ const nextConfig = {
   nx: {
     svgr: true,
   },
+  images: {
+    domains: ['127.0.0.1', 'firebasestorage.googleapis.com'],
+  },
   webpack(config, { dev, isServer, webpack }) {
     // Replace React with Preact for production build. Inspired by
     // https://github.com/preactjs/next-plugin-preact/blob/3f8b5607cc31ad4973561c4aeaeb00066fb28eb8/packages/next-plugin-preact/index.js

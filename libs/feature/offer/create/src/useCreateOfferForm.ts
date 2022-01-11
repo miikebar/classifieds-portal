@@ -31,6 +31,9 @@ export const useCreateOfferForm = ({
       category: 'default',
     },
   });
+  const hasImageError =
+    !files.length &&
+    (form.formState.isSubmitting || form.formState.isSubmitted);
   const dropzone = useDropzone({
     accept: 'image/*',
     maxFiles: 15,
@@ -80,6 +83,11 @@ export const useCreateOfferForm = ({
 
   const handleOfferCreation = useCallback(
     async (data: CreateOfferData) => {
+      if (!files.length) {
+        console.log('no images');
+        return;
+      }
+
       if (!user || !uid) {
         return onError?.(new Error('User is not authenticated'));
       }
@@ -105,7 +113,7 @@ export const useCreateOfferForm = ({
         setPending(false);
       }
     },
-    [onError, onSuccess, uid, uploadFiles, user]
+    [files.length, onError, onSuccess, uid, uploadFiles, user]
   );
 
   const handler = useMemo(
@@ -119,6 +127,7 @@ export const useCreateOfferForm = ({
     removeFile,
     dropzone,
     files,
+    hasImageError,
     ...form,
   };
 };

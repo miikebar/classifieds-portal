@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import { ReactComponent as IconCamera } from '@listic/ui/icons/camera-solid.svg';
+import Image from 'next/image';
 
 interface OfferListItemProps {
   offer: OfferSearchIndex;
@@ -18,9 +19,11 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
         <div className="flex gap-6 h-full">
           <div className="aspect-square bg-gray-100 h-32 rounded-md overflow-hidden grid place-content-center">
             {!!offer.images?.length && (
-              <img
+              <Image
                 src={offer.images[0]}
-                className="w-full h-full object-cover"
+                width={128}
+                height={128}
+                objectFit="contain"
               />
             )}
             {!offer.images?.length && (

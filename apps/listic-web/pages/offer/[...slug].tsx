@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Skeleton from 'react-loading-skeleton';
+import Image from 'next/image';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
@@ -144,13 +145,15 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
           )}
           {(!!offer?.images?.length || isLoading) && (
             <Card>
-              <div className="aspect-video rounded-md overflow-hidden shadow-md">
+              <div className="aspect-video rounded-md overflow-hidden shadow-md relative">
                 {isLoading ? (
                   <Skeleton width="100%" height="100%" />
                 ) : (
-                  <img
+                  <Image
                     src={offer?.images[0]}
-                    className="w-full h-full object-cover"
+                    layout="fill"
+                    objectFit="contain"
+                    sizes="(max-width: 1023px) 100vw, 65vw"
                   />
                 )}
               </div>
