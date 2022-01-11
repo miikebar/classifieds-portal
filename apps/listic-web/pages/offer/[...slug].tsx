@@ -222,10 +222,12 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
         },
         createdAt: format((data.createdAt as Timestamp).toDate(), 'dd.MM.yyyy'),
         updatedAt: format((data.updatedAt as Timestamp).toDate(), 'dd.MM.yyyy'),
-        promoteExpires: format(
-          (data.promoteExpires as Timestamp).toDate(),
-          'dd.MM.yyyy'
-        ),
+        ...(data.promoteExpires && {
+          promoteExpires: format(
+            (data.promoteExpires as Timestamp).toDate(),
+            'dd.MM.yyyy'
+          ),
+        }),
       },
     },
     revalidate: 30,
