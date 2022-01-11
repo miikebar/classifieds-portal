@@ -265,6 +265,40 @@
         }
       }
     },
+    "core-payment": {
+      "root": "libs/core/payment",
+      "sourceRoot": "libs/core/payment/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/core/payment",
+            "tsConfig": "libs/core/payment/tsconfig.lib.json",
+            "packageJson": "libs/core/payment/package.json",
+            "main": "libs/core/payment/src/index.ts",
+            "assets": ["libs/core/payment/*.md"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/payment/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/payment"],
+          "options": {
+            "jestConfig": "libs/core/payment/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "core-schema": {
       "root": "libs/core/schema",
       "sourceRoot": "libs/core/schema/src",
@@ -735,7 +769,7 @@
         "emulate": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "firebase emulators:start --config firebase.listic-firebase.json --import=./.export --export-on-exit"
+            "command": "firebase emulators:start --config firebase.listic-firebase.json --export-on-exit --import=./apps/listic-firebase/.firebase-export"
           }
         },
         "serve": {
@@ -918,6 +952,52 @@
           "outputs": ["coverage/libs/react/firebase/functions"],
           "options": {
             "jestConfig": "libs/react/firebase/functions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-offer-list": {
+      "root": "libs/react/offer/list",
+      "sourceRoot": "libs/react/offer/list/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react/offer/list/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/offer/list"],
+          "options": {
+            "jestConfig": "libs/react/offer/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-payment": {
+      "root": "libs/react/payment",
+      "sourceRoot": "libs/react/payment/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react/payment/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/payment"],
+          "options": {
+            "jestConfig": "libs/react/payment/jest.config.js",
             "passWithNoTests": true
           }
         }

@@ -11,6 +11,7 @@ interface ChatRoomWithId extends ChatRoom {
 
 export const useChatList = () => {
   const { uid } = useAuth();
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<ChatRoomWithId[]>([]);
 
   const fetchChatRooms = useCallback(() => {
@@ -20,6 +21,7 @@ export const useChatList = () => {
     );
 
     const unsubscribe = onSnapshot(roomsQuery, (snapshot) => {
+      setLoading(false);
       setData(
         snapshot.docs.map(
           (doc) => ({ id: doc.id, ...doc.data() } as ChatRoomWithId)
@@ -34,5 +36,5 @@ export const useChatList = () => {
     fetchChatRooms();
   }, [fetchChatRooms]);
 
-  return { data };
+  return { data, isLoading };
 };

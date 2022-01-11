@@ -1,7 +1,4 @@
 {
-  "database": {
-    "rules": "apps/listic-firebase/database.rules.json"
-  },
   "firestore": {
     "rules": "apps/listic-firebase/firestore.rules",
     "indexes": "apps/listic-firebase/firestore.indexes.json"

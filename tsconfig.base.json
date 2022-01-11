@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@listic/core-firebase-utils": ["libs/core/firebase/utils/src/index.ts"],
+      "@listic/core-payment": ["libs/core/payment/src/index.ts"],
       "@listic/core-search": ["libs/core/search/src/index.ts"],
       "@listic/core-user-types": ["libs/core/user/types/src/index.ts"],
       "@listic/core/auth": ["libs/core/auth/src/index.ts"],
@@ -59,6 +60,8 @@
       "@listic/react/firebase/functions": [
         "libs/react/firebase/functions/src/index.ts"
       ],
+      "@listic/react/offer/list": ["libs/react/offer/list/src/index.ts"],
+      "@listic/react/payment": ["libs/react/payment/src/index.ts"],
       "@listic/react/utils": ["libs/react/utils/src/index.ts"],
       "@listic/ui/button": ["libs/ui/button/src/index.ts"],
       "@listic/ui/card": ["libs/ui/card/src/index.ts"],

@@ -16,25 +16,28 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import Skeleton from 'react-loading-skeleton';
 
 interface OfferPageProps {
-  offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'owner'> & {
+  offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
     id: string;
     createdAt: string;
     updatedAt: string;
+    promoteExpires: string;
     owner: Omit<Offer['owner'], 'createdAt'> & { createdAt: string };
   };
 }
 
 const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
+  const isLoading = !offer;
   const { uid, isAuthenticated } = useAuth();
   const router = useRouter();
-  const { isPending, setActive } = useOfferStatusManager(offer.id);
+  const { isPending, setActive } = useOfferStatusManager(offer?.id);
   const createChatRoom = useCreateChatRoom();
   const [isChatPending, setChatPending] = useState(false);
 
   const onChangeStatus = async () => {
-    await setActive(!offer.isActive);
+    await setActive(!offer?.isActive);
     toast.success('Status ogłoszenia został zaktualizowany');
     router.push(Route.LANDING_PAGE);
   };
@@ -46,12 +49,15 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
 
     setChatPending(true);
     let chatId = await findChatID({
-      offerId: offer.id,
+      offerId: offer?.id,
       userId: uid,
     });
 
     if (!chatId) {
-      const chatRoom = await createChatRoom({ userId: uid, offerId: offer.id });
+      const chatRoom = await createChatRoom({
+        userId: uid,
+        offerId: offer?.id,
+      });
       chatId = chatRoom.data.id;
     }
 
@@ -66,22 +72,29 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
         </Card.Header>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col">
-            <span className="font-bold  text-lg">{offer.owner.name}</span>
+            <span className="font-bold  text-lg">
+              {offer?.owner.name ?? <Skeleton />}
+            </span>
             <span className="text-sm text-gray-500">
-              Na Listic od 10 grudnia 2021
+              {!isLoading ? (
+                `Na Listic od ${offer.owner.createdAt}`
+              ) : (
+                <Skeleton />
+              )}
             </span>
           </div>
           <div className="flex gap-2">
             <Button
               as="a"
-              href={`tel:${offer.owner.phone}`}
+              href={`tel:${offer?.owner.phone}`}
               variant="ghost"
               className="flex-1"
-              isDisabled={!offer.owner.phone}
+              isDisabled={!offer?.owner.phone}
             >
               Zadzwoń
             </Button>
             <Button
+              isDisabled={isLoading}
               isLoading={isChatPending}
               className="flex-1"
               onClick={onChatClick}
@@ -113,7 +126,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
             className="flex-1"
             onClick={onChangeStatus}
           >
-            {offer.isActive ? 'Zakończ' : 'Przywróć'}
+            {offer?.isActive ? 'Zakończ' : 'Przywróć'}
           </Button>
         </div>
       </Card>
@@ -124,43 +137,51 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
     <div className="flex-1 bg-gray-100">
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
-          {!offer.isActive && (
+          {!isLoading && !offer.isActive && (
             <Card className="bg-amber-400">
               Ta oferta została zakończona przez sprzedawcę
             </Card>
           )}
-          {!!offer.images?.length && (
+          {(!!offer?.images?.length || isLoading) && (
             <Card>
               <div className="aspect-video rounded-md overflow-hidden shadow-md">
-                <img
-                  src={offer.images[0]}
-                  className="w-full h-full object-cover"
-                />
+                {isLoading ? (
+                  <Skeleton width="100%" height="100%" />
+                ) : (
+                  <img
+                    src={offer?.images[0]}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
             </Card>
           )}
           <Card>
             <span className="text-sm text-gray-500 block mb-1">
-              Dodano {format(new Date(offer.createdAt), 'dd.MM.yyyy')}
+              {offer ? `Dodano ${offer.createdAt}` : <Skeleton width="200px" />}
             </span>
             <Card.Header>
-              <h2 className="text-3xl mb-3">{offer.name}</h2>
+              <h2 className="text-3xl mb-3">{offer?.name}</h2>
               <span className="font-bold text-4xl text-gray-700">
-                {offer.price} zł
+                {!isLoading ? `${offer.price} zł` : <Skeleton width="100px" />}
               </span>
-              <a
-                href="#cat"
-                className="border self-start py-1 px-2 border-gray-500 rounded-md text-sm mt-2 transition-colors hover:bg-gray-100"
-              >
-                {offer.category}
-              </a>
+              {!isLoading ? (
+                <a
+                  href="#cat"
+                  className="border self-start py-1 px-2 border-gray-500 rounded-md text-sm mt-2 transition-colors hover:bg-gray-100"
+                >
+                  {offer?.category}
+                </a>
+              ) : (
+                <Skeleton width="80px" />
+              )}
             </Card.Header>
-            <p>{offer.description}</p>
+            <p>{offer?.description ?? <Skeleton count={10} />}</p>
           </Card>
         </div>
         <div className="lg:w-1/4">
-          {uid !== offer.owner.id && renderSellerInfo()}
-          {uid === offer.owner.id && renderOfferManagement()}
+          {(isLoading || uid) !== offer?.owner.id && renderSellerInfo()}
+          {!isLoading && uid === offer?.owner.id && renderOfferManagement()}
         </div>
       </Container>
     </div>
@@ -194,10 +215,17 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
         ...data,
         owner: {
           ...data.owner,
-          createdAt: (data.owner.createdAt as Timestamp).toDate().toJSON(),
+          createdAt: format(
+            (data.owner.createdAt as Timestamp).toDate(),
+            'dd.MM.yyyy'
+          ),
         },
-        createdAt: (data.createdAt as Timestamp).toDate().toJSON(),
-        updatedAt: (data.updatedAt as Timestamp).toDate().toJSON(),
+        createdAt: format((data.createdAt as Timestamp).toDate(), 'dd.MM.yyyy'),
+        updatedAt: format((data.updatedAt as Timestamp).toDate(), 'dd.MM.yyyy'),
+        promoteExpires: format(
+          (data.promoteExpires as Timestamp).toDate(),
+          'dd.MM.yyyy'
+        ),
       },
     },
     revalidate: 30,
@@ -207,7 +235,7 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: true,
   };
 };
 

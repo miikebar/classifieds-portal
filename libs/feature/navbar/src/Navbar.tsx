@@ -47,6 +47,9 @@ export const Navbar: React.FC = () => {
             <Link passHref href={Route.CHAT}>
               <a>Wiadomości</a>
             </Link>
+            <Link passHref href={Route.OFFER.VIEW}>
+              <a>Moje ogłoszenia</a>
+            </Link>
             <Link passHref href={Route.OFFER.CREATE}>
               <Button as="a" leftIcon={<IconPlus />}>
                 Dodaj ogłoszenie
