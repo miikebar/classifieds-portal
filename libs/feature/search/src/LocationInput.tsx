@@ -1,7 +1,7 @@
 import {
   GeoapifyGeocoderAutocomplete,
   GeoapifyContext,
-} from '@geoapify/react-geocoder-autocomplete';
+} from '@geoapify/react-geocoder-autocomplete/dist/index';
 import '@geoapify/geocoder-autocomplete/styles/minimal.css';
 import { Offer } from '@listic/feature-offer-types';
 
