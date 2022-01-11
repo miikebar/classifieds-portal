@@ -3,9 +3,11 @@ import { Container } from '@listic/ui/container';
 import { Search } from '@listic/feature/search';
 import { OfferList } from '@listic/feature/offer/list';
 import { useState } from 'react';
+import { Offer } from '@listic/feature-offer-types';
 
 const LandingPage: PageWithLayout = () => {
   const [query, setQuery] = useState('');
+  const [location, setLocation] = useState<Offer['_geoloc'] | null>(null);
 
   return (
     <div className="flex-1 flex flex-col bg-gray-100">
@@ -25,12 +27,17 @@ const LandingPage: PageWithLayout = () => {
                 czego potrzebujesz jest w zasięgu Twojej ręki!
               </p>
             </div>
-            <Search onQueryChange={setQuery} />
+            <Search
+              onQueryChange={(query, location) => {
+                setQuery(query);
+                setLocation(location);
+              }}
+            />
           </div>
         </Container>
       </div>
       <Container className="my-8">
-        <OfferList query={query} />
+        <OfferList query={query} location={location} />
       </Container>
     </div>
   );

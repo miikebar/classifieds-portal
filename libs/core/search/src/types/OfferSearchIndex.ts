@@ -17,4 +17,9 @@ export interface OfferSearchIndex {
     phone?: string;
     createdAt: number;
   };
+  _geoloc: {
+    lat: number;
+    lng: number;
+  };
+  location: string;
 }

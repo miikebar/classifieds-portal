@@ -14,6 +14,11 @@ export const CreateOfferSchema = object({
   category: enums(categories),
   description: nonempty(string()),
   price: size(number(), 0, Infinity),
+  location: nonempty(string()),
+  _geoloc: object({
+    lat: number(),
+    lng: number(),
+  }),
 });
 
 export type CreateOfferData = Infer<typeof CreateOfferSchema>;

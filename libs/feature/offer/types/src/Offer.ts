@@ -14,4 +14,9 @@ export interface Offer {
   owner: UserProfile & { id: string };
   isPromoted?: boolean;
   promoteExpires?: Timestamp | Date;
+  location: string;
+  _geoloc: {
+    lat: number;
+    lng: number;
+  };
 }

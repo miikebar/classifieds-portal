@@ -7,11 +7,13 @@ import { useCreateOfferForm } from './useCreateOfferForm';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Route } from '@listic/feature/route';
+import { LocationInput } from 'libs/feature/search/src/LocationInput';
 
 export const CreateOfferForm: React.FC = () => {
   const router = useRouter();
   const {
     register,
+    setValue,
     isPending,
     handleSubmit,
     dropzone,
@@ -49,7 +51,11 @@ export const CreateOfferForm: React.FC = () => {
   };
 
   return (
-    <form noValidate className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <form
+      noValidate
+      className="flex flex-col gap-4 create-offer"
+      onSubmit={handleSubmit}
+    >
       <Card>
         <Card.Header>
           <Card.Title>Szczegóły ogłoszenia</Card.Title>
@@ -97,6 +103,16 @@ export const CreateOfferForm: React.FC = () => {
             <FormErrorMessage>
               Podaj prawidłową cenę. Minimalna kwota to 0 zł
             </FormErrorMessage>
+          </FormControl>
+          <FormControl isRequired isInvalid={!!errors._geoloc}>
+            <FormLabel>Lokalizacja</FormLabel>
+            <LocationInput
+              onPlaceSelect={(place, name) => {
+                setValue('_geoloc', place as any);
+                setValue('location', name ?? '');
+              }}
+            />
+            <FormErrorMessage>Wybierz lokalizację ogłoszenia</FormErrorMessage>
           </FormControl>
         </div>
       </Card>

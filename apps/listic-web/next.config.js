@@ -1,15 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
-process.env.NEXT_TRANSLATE_PATH = path.join(
-  process.cwd(),
-  'apps',
-  'listic-web'
-);
 const usePreactInDev = process.env.PREACT_IN_DEV === 'true';
-
 const withPlugins = require('next-compose-plugins');
 const withNx = require('@nrwl/next/plugins/with-nx');
-const withNextTranslate = require('next-translate');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -56,7 +47,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withNx, withNextTranslate],
-  nextConfig
-);
+module.exports = withPlugins([withBundleAnalyzer, withNx], nextConfig);

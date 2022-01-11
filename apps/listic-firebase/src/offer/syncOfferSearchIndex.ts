@@ -15,6 +15,9 @@ export const syncOfferSearchIndex = functions
     }
 
     const offer = change.after.data();
+
+    console.log({ offer });
+
     const object: OfferSearchIndex = {
       // TODO: use correct casting after buildable library conversion
       objectID: change.after.id,

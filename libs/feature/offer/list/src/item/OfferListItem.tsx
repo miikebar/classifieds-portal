@@ -36,6 +36,7 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
             </div>
             <div className="flex justify-between items-end">
               <span className="text-sm text-gray-500">
+                {offer.location},{' '}
                 {formatDistanceToNow(new Date(offer.createdAt * 1000), {
                   locale: pl,
                   addSuffix: true,

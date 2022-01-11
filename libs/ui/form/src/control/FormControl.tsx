@@ -16,7 +16,12 @@ export const FormControl: React.FC<FormControlProps> = ({
 }) => {
   return (
     <FormControlProvider {...controlProps}>
-      <div className={`flex flex-col gap-1 ${className}`}>{children}</div>
+      <div
+        className={`flex flex-col gap-1 ${className}`}
+        data-invalid={controlProps.isInvalid}
+      >
+        {children}
+      </div>
     </FormControlProvider>
   );
 };

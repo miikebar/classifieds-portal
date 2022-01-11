@@ -1,4 +1,5 @@
 import { OfferSearchIndex } from '@listic/core-search';
+import { Offer } from '@listic/feature-offer-types';
 import algolia from 'algoliasearch/lite';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -13,17 +14,24 @@ const index = client.initIndex(
 
 interface UseOfferListProps {
   query?: string;
+  location?: Offer['_geoloc'];
 }
 
-export const useOfferList = ({ query }: UseOfferListProps = {}) => {
+export const useOfferList = ({ query, location }: UseOfferListProps = {}) => {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<OfferSearchIndex[]>([]);
 
   const fetchOffers = useCallback(async () => {
-    const { hits } = await index.search<OfferSearchIndex>(query ?? '');
+    console.log({ query, location });
+
+    const { hits } = await index.search<OfferSearchIndex>(query ?? '', {
+      ...(location && {
+        aroundLatLng: `${location.lat}, ${location.lng}`,
+      }),
+    });
     setData(hits);
     setLoading(false);
-  }, [query]);
+  }, [location, query]);
 
   useEffect(() => {
     fetchOffers();

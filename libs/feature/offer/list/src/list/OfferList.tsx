@@ -1,12 +1,14 @@
+import { Offer } from '@listic/feature-offer-types';
 import { OfferListItem } from '../item/OfferListItem';
 import { useOfferList } from './useOfferList';
 
 interface OfferListProps {
   query?: string;
+  location?: Offer['_geoloc'];
 }
 
-export const OfferList: React.FC<OfferListProps> = ({ query }) => {
-  const { isLoading, data } = useOfferList({ query });
+export const OfferList: React.FC<OfferListProps> = ({ query, location }) => {
+  const { isLoading, data } = useOfferList({ query, location });
 
   return (
     <div className="flex flex-col gap-4">

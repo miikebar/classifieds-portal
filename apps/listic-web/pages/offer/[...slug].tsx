@@ -158,7 +158,11 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
           )}
           <Card>
             <span className="text-sm text-gray-500 block mb-1">
-              {offer ? `Dodano ${offer.createdAt}` : <Skeleton width="200px" />}
+              {offer ? (
+                `${offer.location}, dodano ${offer.createdAt}`
+              ) : (
+                <Skeleton width="200px" />
+              )}
             </span>
             <Card.Header>
               <h2 className="text-3xl mb-3">{offer?.name}</h2>
