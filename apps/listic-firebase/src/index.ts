@@ -1,3 +1,4 @@
+export * from './user/syncUserProfile';
 export * from './offer/syncOfferSearchIndex';
 export * from './chat/createChatRoom';
 export * from './promote/createCheckoutSession';

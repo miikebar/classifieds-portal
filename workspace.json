@@ -769,7 +769,7 @@
         "emulate": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "firebase emulators:start --config firebase.listic-firebase.json --export-on-exit --import=./apps/listic-firebase/.firebase-export"
+            "command": "firebase emulators:start --config firebase.listic-firebase.json"
           }
         },
         "serve": {

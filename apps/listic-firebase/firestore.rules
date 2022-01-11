@@ -10,13 +10,13 @@ service cloud.firestore {
     }
 
     match /users/{uid} {
-      allow read: if true;
-      allow write: if isRequestedUser(uid);
+      allow read, write: if isRequestedUser(uid);
     }
 
     match /offers/{uid} {
       allow read: if true;
-      allow write: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && resource.data.owner.id == request.auth.uid;
     }
 
     match /chats/{chatId} {
