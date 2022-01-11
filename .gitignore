@@ -53,6 +53,9 @@ Thumbs.db
 .runtimeconfig.json
 .firebase/
 
+firebase-export-*
+.firebase-export
+
 ### Linux ###
 *~
 

@@ -1,6 +1,6 @@
 import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
 import { Container } from '@listic/ui/container';
-import { useUserOffers } from '@listic/react/offer/list';
+import { OfferWithId, useUserOffers } from '@listic/react/offer/list';
 import { useCreateCheckoutSession } from '@listic/react/payment';
 import { Button } from '@listic/ui/button';
 import { Product } from '@listic/core-payment';
@@ -14,8 +14,10 @@ import toast from 'react-hot-toast';
 
 export const OfferListPage: PageWithLayout = () => {
   const router = useRouter();
-  const { data } = useUserOffers();
-  const [isPending, setPending] = useState(false);
+  const { data, isLoading } = useUserOffers();
+  const [isPending7Days, setPending7Days] = useState(false);
+  const [isPending30Days, setPending30Days] = useState(false);
+  const isPending = isPending7Days || isPending30Days;
   const createCheckoutSession = useCreateCheckoutSession();
 
   useEffect(() => {
@@ -29,6 +31,9 @@ export const OfferListPage: PageWithLayout = () => {
   }, [router.query.canceled, router.query.success]);
 
   const onPromoteClick = async (offerId: string, product: Product) => {
+    const setPending =
+      product === Product.PROMOTE_7_DAYS ? setPending7Days : setPending30Days;
+
     try {
       setPending(true);
       const {
@@ -46,13 +51,43 @@ export const OfferListPage: PageWithLayout = () => {
     }
   };
 
-  return (
-    <Container className="pt-3">
+  const renderPromoteSection = (offer: OfferWithId) => {
+    if (offer.isPromoted) {
+      return (
+        <div>
+          Promowanie aktywne do{' '}
+          {format((offer.promoteExpires as Timestamp).toDate(), 'dd.MM.yyyy')}
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col gap-2">
+        <Button
+          isLoading={isPending7Days}
+          isDisabled={isPending}
+          onClick={() => onPromoteClick(offer.id, Product.PROMOTE_7_DAYS)}
+        >
+          Promuj przez 7 dni
+        </Button>
+        <Button
+          isLoading={isPending30Days}
+          isDisabled={isPending}
+          onClick={() => onPromoteClick(offer.id, Product.PROMOTE_30_DAYS)}
+        >
+          Promuj przez 30 dni
+        </Button>
+      </div>
+    );
+  };
+
+  const renderOffers = () => {
+    return (
       <div className="flex flex-col gap-4">
         {data.map((offer) => (
           <div
             key={offer.id}
-            className="border p-4 rounded-md shadow-sm flex flex-col gap-4 md:flex-row md:justify-between md:items-center"
+            className="bg-white border p-4 rounded-md shadow-sm flex flex-col gap-4 md:flex-row md:justify-between md:items-center"
           >
             <div className="flex flex-col">
               <Link passHref href={`${Route.OFFER.VIEW}/${offer.id}`}>
@@ -62,26 +97,24 @@ export const OfferListPage: PageWithLayout = () => {
                 {format((offer.createdAt as Timestamp).toDate(), 'dd.MM.yyyy')}
               </span>
             </div>
-            <div className="flex flex-col gap-2">
-              <Button
-                isLoading={isPending}
-                onClick={() => onPromoteClick(offer.id, Product.PROMOTE_7_DAYS)}
-              >
-                Promuj przez 7 dni
-              </Button>
-              <Button
-                isLoading={isPending}
-                onClick={() =>
-                  onPromoteClick(offer.id, Product.PROMOTE_30_DAYS)
-                }
-              >
-                Promuj przez 30 dni
-              </Button>
-            </div>
+            {renderPromoteSection(offer)}
           </div>
         ))}
       </div>
-    </Container>
+    );
+  };
+
+  const renderNoOffers = () => {
+    return <div>Brak ofert do wyświetlenia</div>;
+  };
+
+  return (
+    <div className="flex-1 bg-gray-100">
+      <Container className="pt-4">
+        {!isLoading && !data.length && renderNoOffers()}
+        {!isLoading && !!data.length && renderOffers()}
+      </Container>
+    </div>
   );
 };
 

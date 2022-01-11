@@ -33,8 +33,6 @@ export const handlePaymentUpdate = functions
       return;
     }
 
-    console.log('hello');
-
     switch (event.type) {
       case 'checkout.session.completed':
         await enableOfferPromoting(

@@ -34,13 +34,18 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
               <span className="font-bold text-lg">{offer.name}</span>
               <span className="font-bold text-gray-700">{offer.price} zł</span>
             </div>
-            <div>
+            <div className="flex justify-between items-end">
               <span className="text-sm text-gray-500">
                 {formatDistanceToNow(new Date(offer.createdAt * 1000), {
                   locale: pl,
                   addSuffix: true,
                 })}
               </span>
+              {offer.isPromoted && (
+                <span className="bg-blue-400 text-white p-2 rounded-md text-sm">
+                  Oferta promowana
+                </span>
+              )}
             </div>
           </div>
         </div>

@@ -11,12 +11,13 @@ import {
 } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 
-interface OfferWithId extends Offer {
+export interface OfferWithId extends Offer {
   id: string;
 }
 
 export const useUserOffers = () => {
   const { uid } = useAuth();
+  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<OfferWithId[]>([]);
 
   const fetchUserOffers = useCallback(() => {
@@ -29,6 +30,7 @@ export const useUserOffers = () => {
     );
 
     const unsubscribe = onSnapshot(offersQuery, (snapshot) => {
+      setLoading(false);
       setData(
         snapshot.docs.map(
           (doc) => ({ id: doc.id, ...doc.data() } as OfferWithId)
@@ -43,5 +45,5 @@ export const useUserOffers = () => {
     return fetchUserOffers();
   }, [fetchUserOffers]);
 
-  return { data };
+  return { data, isLoading };
 };

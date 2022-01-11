@@ -19,10 +19,11 @@ import toast from 'react-hot-toast';
 import Skeleton from 'react-loading-skeleton';
 
 interface OfferPageProps {
-  offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'owner'> & {
+  offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
     id: string;
     createdAt: string;
     updatedAt: string;
+    promoteExpires: string;
     owner: Omit<Offer['owner'], 'createdAt'> & { createdAt: string };
   };
 }
@@ -221,6 +222,10 @@ export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
         },
         createdAt: format((data.createdAt as Timestamp).toDate(), 'dd.MM.yyyy'),
         updatedAt: format((data.updatedAt as Timestamp).toDate(), 'dd.MM.yyyy'),
+        promoteExpires: format(
+          (data.promoteExpires as Timestamp).toDate(),
+          'dd.MM.yyyy'
+        ),
       },
     },
     revalidate: 30,

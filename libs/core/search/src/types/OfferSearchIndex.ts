@@ -1,4 +1,3 @@
-// TODO: use libs after making them buildable
 export interface OfferSearchIndex {
   objectID: string;
   name: string;
@@ -10,6 +9,7 @@ export interface OfferSearchIndex {
   createdAt: number;
   updatedAt: number;
   images?: string[];
+  isPromoted?: boolean;
   owner: {
     id: string;
     name: string;
