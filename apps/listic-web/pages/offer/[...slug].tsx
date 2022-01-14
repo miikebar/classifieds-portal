@@ -199,7 +199,7 @@ OfferPage.getLayout = getMainLayout;
 
 export const getStaticProps: GetStaticProps<OfferPageProps> = async (ctx) => {
   const [slugParam] = ctx.params.slug as string;
-  const [id, slug] = slugParam.split('.');
+  const [id, _] = slugParam.split('.');
 
   const offer = await adminFirestore
     .collection(Collection.OFFERS)

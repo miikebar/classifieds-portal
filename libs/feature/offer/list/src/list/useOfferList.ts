@@ -22,8 +22,6 @@ export const useOfferList = ({ query, location }: UseOfferListProps = {}) => {
   const [data, setData] = useState<OfferSearchIndex[]>([]);
 
   const fetchOffers = useCallback(async () => {
-    console.log({ query, location });
-
     const { hits } = await index.search<OfferSearchIndex>(query ?? '', {
       ...(location && {
         aroundLatLng: `${location.lat}, ${location.lng}`,
