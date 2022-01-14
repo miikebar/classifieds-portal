@@ -66,11 +66,15 @@ export const useCreateOfferForm = ({
         import('firebase/storage').then((m) => m.getDownloadURL),
       ]);
 
+    console.log('uploading file');
+
     const storageRef = ref(
       firebaseStorage,
       `${Storage.OFFERS}/${offerId}/${file.name}`
     );
     const result = await uploadBytes(storageRef, file);
+
+    console.log('getting download url');
     return getDownloadURL(result.ref);
   }, []);
 

@@ -4,11 +4,16 @@ import { useOfferList } from './useOfferList';
 
 interface OfferListProps {
   query?: string;
+  radius?: number | 'all';
   location?: Offer['_geoloc'];
 }
 
-export const OfferList: React.FC<OfferListProps> = ({ query, location }) => {
-  const { isLoading, data } = useOfferList({ query, location });
+export const OfferList: React.FC<OfferListProps> = ({
+  query,
+  location,
+  radius,
+}) => {
+  const { isLoading, data } = useOfferList({ query, location, radius });
 
   return (
     <div className="flex flex-col gap-4">

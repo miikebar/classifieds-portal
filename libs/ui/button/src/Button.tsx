@@ -13,7 +13,7 @@ export interface ButtonOwnProps extends ComponentPropsWithoutRef<'button'> {
   isDisabled?: boolean;
   isLoading?: boolean;
   loadingText?: string;
-  variant?: 'primary' | 'ghost';
+  variant?: 'primary' | 'ghost' | 'secondary';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 }
@@ -87,6 +87,7 @@ export const Button: PolymorphicForwardRefExoticComponent<
         [className]: true,
         [ghostClasses]: variant === 'ghost',
         [primaryClasses]: variant === 'primary',
+        [secondaryClasses]: variant === 'secondary',
         [disabledClasses]: isLoading || isDisabled,
         [baseClasses]: true,
       })}
@@ -104,3 +105,4 @@ const baseClasses =
 const primaryClasses = 'bg-amber-400 hover:bg-amber-300 active:bg-amber-200';
 const ghostClasses = 'hover:bg-gray-100 active:bg-gray-200';
 const disabledClasses = 'opacity-50 cursor-not-allowed';
+const secondaryClasses = 'bg-gray-200 hover:bg-gray-100 active:bg-gray-50';

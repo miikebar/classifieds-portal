@@ -11,7 +11,15 @@ interface SelectProps extends ComponentPropsWithoutRef<'select'> {
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
-    { id, disabled, isInvalid, required = true, variant = 'light', ...props },
+    {
+      id,
+      disabled,
+      isInvalid,
+      required = true,
+      variant = 'light',
+      className = '',
+      ...props
+    },
     ref
   ) => {
     const control = useFormControl();
@@ -27,6 +35,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         ref={ref}
         className={cs({
           [classes.root]: true,
+          [className]: true,
           [base]: true,
           [variantDark]: variant === 'dark',
           [variantLight]: variant === 'light',

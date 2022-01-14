@@ -655,6 +655,31 @@
         }
       }
     },
+    "feature-offer-manage": {
+      "root": "libs/feature/offer/manage",
+      "sourceRoot": "libs/feature/offer/manage/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/feature/offer/manage/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature/offer/manage"],
+          "options": {
+            "jestConfig": "libs/feature/offer/manage/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "feature-offer-types": {
       "root": "libs/feature/offer/types",
       "sourceRoot": "libs/feature/offer/types/src",
@@ -952,6 +977,31 @@
           "outputs": ["coverage/libs/react/firebase/functions"],
           "options": {
             "jestConfig": "libs/react/firebase/functions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-offer-gallery": {
+      "root": "libs/react/offer/gallery",
+      "sourceRoot": "libs/react/offer/gallery/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/react/offer/gallery/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/offer/gallery"],
+          "options": {
+            "jestConfig": "libs/react/offer/gallery/jest.config.js",
             "passWithNoTests": true
           }
         }

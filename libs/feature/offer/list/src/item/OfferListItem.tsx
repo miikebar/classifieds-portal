@@ -33,11 +33,11 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
             )}
           </div>
           <div className="flex flex-1 flex-col justify-between">
-            <div className="flex justify-between">
+            <div className="flex flex-col sm:flex-row sm:justify-between">
               <span className="font-bold text-lg">{offer.name}</span>
               <span className="font-bold text-gray-700">{offer.price} zł</span>
             </div>
-            <div className="flex justify-between items-end">
+            <div className="flex flex-col items-start sm:flex-row sm:justify-between sm:items-end">
               <span className="text-sm text-gray-500">
                 {offer.location},{' '}
                 {formatDistanceToNow(new Date(offer.createdAt * 1000), {
@@ -45,6 +45,11 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
                   addSuffix: true,
                 })}
               </span>
+              {!offer.isActive && (
+                <span className="bg-gray-300  p-2 rounded-md text-sm text-gray-600">
+                  Oferta zakończona
+                </span>
+              )}
               {offer.isPromoted && (
                 <span className="bg-blue-400 text-white p-2 rounded-md text-sm">
                   Oferta promowana

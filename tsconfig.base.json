@@ -53,6 +53,9 @@
         "libs/feature/offer/create/src/index.ts"
       ],
       "@listic/feature/offer/list": ["libs/feature/offer/list/src/index.ts"],
+      "@listic/feature/offer/manage": [
+        "libs/feature/offer/manage/src/index.ts"
+      ],
       "@listic/feature/route": ["libs/feature/route/src/index.ts"],
       "@listic/feature/search": ["libs/feature/search/src/index.ts"],
       "@listic/react/auth/core": ["libs/react/auth/core/src/index.ts"],
@@ -60,6 +63,7 @@
       "@listic/react/firebase/functions": [
         "libs/react/firebase/functions/src/index.ts"
       ],
+      "@listic/react/offer/gallery": ["libs/react/offer/gallery/src/index.ts"],
       "@listic/react/offer/list": ["libs/react/offer/list/src/index.ts"],
       "@listic/react/payment": ["libs/react/payment/src/index.ts"],
       "@listic/react/utils": ["libs/react/utils/src/index.ts"],

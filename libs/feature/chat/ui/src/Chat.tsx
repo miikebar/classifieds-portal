@@ -3,6 +3,7 @@ import { useAuth } from '@listic/react/auth/core';
 import { useChat } from '@listic/react/chat/core';
 import throttle from 'lodash.throttle';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { ChatInput } from './input/ChatInput';
@@ -15,6 +16,7 @@ interface ChatProps {
 const INPUT_NAME = 'message';
 
 export const Chat: React.FC<ChatProps> = ({ chatId }) => {
+  const router = useRouter();
   const { uid } = useAuth();
   const messageListRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,6 +37,7 @@ export const Chat: React.FC<ChatProps> = ({ chatId }) => {
     messages,
     chat,
     hasOlderMessages,
+    chatExists,
     sendMessage,
     loadOlderMessages,
   } = useChat({
@@ -42,6 +45,12 @@ export const Chat: React.FC<ChatProps> = ({ chatId }) => {
     onError: handleError,
     onNewMessage: scrollMessagesToBottom,
   });
+
+  useEffect(() => {
+    if (!chatExists) {
+      router.push('/404');
+    }
+  }, [chatExists, router]);
 
   const onSubmit = useCallback(
     async (message: string) => {

@@ -21,7 +21,7 @@ export const useOfferStatusManager = (offerId: string | undefined) => {
           import('firebase/firestore/lite').then((m) => m.updateDoc),
         ]);
         const offerDoc = doc(firestoreLite, Collection.OFFERS, offerId);
-        await updateDoc(offerDoc, { active: isActive } as Partial<Offer>);
+        await updateDoc(offerDoc, { isActive } as Partial<Offer>);
       } catch (error) {
         console.error(error);
       } finally {

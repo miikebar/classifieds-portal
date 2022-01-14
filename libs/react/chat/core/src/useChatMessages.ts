@@ -64,13 +64,17 @@ export const useChatMessages = ({
       limit(MESSAGES_PER_LOAD)
     );
 
-    const snapshot = await getDocs(msgsQuery);
-    const messages = mapDocsToMessages(snapshot.docs).reverse();
+    try {
+      const snapshot = await getDocs(msgsQuery);
+      const messages = mapDocsToMessages(snapshot.docs).reverse();
 
-    setPrevMessages(messages);
-    setNewestMessageRef(snapshot.docs[0] ?? null);
-    setOldestMessageRef(snapshot.docs[snapshot.docs.length - 1] ?? null);
-    setInitialized(true);
+      setPrevMessages(messages);
+      setNewestMessageRef(snapshot.docs[0] ?? null);
+      setOldestMessageRef(snapshot.docs[snapshot.docs.length - 1] ?? null);
+      setInitialized(true);
+    } catch (error) {
+      // Chat does not exist
+    }
   }, [chatId, mapDocsToMessages]);
 
   useEffect(() => {

@@ -18,6 +18,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Skeleton from 'react-loading-skeleton';
 import Image from 'next/image';
+import { useOfferGallery } from '@listic/react/offer/gallery';
+import { ReactComponent as IconAngleLeft } from '@listic/ui/icons/angle-left-solid.svg';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
@@ -36,6 +38,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
   const { isPending, setActive } = useOfferStatusManager(offer?.id);
   const createChatRoom = useCreateChatRoom();
   const [isChatPending, setChatPending] = useState(false);
+  const gallery = useOfferGallery({ images: offer?.images ?? [] });
 
   const onChangeStatus = async () => {
     await setActive(!offer?.isActive);
@@ -90,12 +93,12 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
               href={`tel:${offer?.owner.phone}`}
               variant="ghost"
               className="flex-1"
-              isDisabled={!offer?.owner.phone}
+              isDisabled={!offer?.owner.phone || !offer.isActive}
             >
               Zadzwoń
             </Button>
             <Button
-              isDisabled={isLoading}
+              isDisabled={isLoading || !offer.isActive}
               isLoading={isChatPending}
               className="flex-1"
               onClick={onChatClick}
@@ -119,7 +122,11 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
           status
         </p>
         <div className="flex gap-4">
-          <Button variant="ghost" className="flex-1">
+          <Button
+            isDisabled={!offer.isActive}
+            variant="ghost"
+            className="flex-1"
+          >
             Edytuj
           </Button>
           <Button
@@ -139,7 +146,7 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
       <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
         <div className="flex flex-col gap-4 lg:w-3/4">
           {!isLoading && !offer.isActive && (
-            <Card className="bg-amber-400">
+            <Card className="offer-closed">
               Ta oferta została zakończona przez sprzedawcę
             </Card>
           )}
@@ -150,11 +157,34 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
                   <Skeleton width="100%" height="100%" />
                 ) : (
                   <Image
-                    src={offer?.images[0]}
+                    src={gallery.currentImg}
                     layout="fill"
                     objectFit="contain"
                     sizes="(max-width: 1023px) 100vw, 65vw"
+                    priority
+                    alt={offer.name}
                   />
+                )}
+                {gallery.hasMultipleImages && (
+                  <>
+                    <div className="bg-gray-300 absolute right-4 top-4 py-1 px-2 text-sm rounded-xl">{`${
+                      gallery.currentImgIdx + 1
+                    }/${gallery.totalImages}`}</div>
+                    <div className="absolute top-1/2 -translate-y-1/2 flex justify-between left-0 right-0 px-4">
+                      <button
+                        className="bg-gray-300 w-10 h-10 rounded-full"
+                        onClick={gallery.prevImage}
+                      >
+                        <IconAngleLeft className="h-7 text-gray-600 block mx-auto" />
+                      </button>
+                      <button
+                        className="bg-gray-300 w-10 h-10 rounded-full"
+                        onClick={gallery.nextImage}
+                      >
+                        <IconAngleLeft className="h-7 text-gray-600 block mx-auto rotate-180" />
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             </Card>

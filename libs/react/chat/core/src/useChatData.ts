@@ -10,17 +10,22 @@ interface UseChatDataProps {
 
 export const useChatData = ({ chatId }: UseChatDataProps) => {
   const [data, setData] = useState<ChatRoom | null>(null);
+  const [exists, setExists] = useState(true);
 
   const fetchChatData = useCallback(async () => {
-    const chatDoc = await getDoc(
-      doc(firestore, `${Collection.CHATS}/${chatId}`)
-    );
-    setData(chatDoc.data() as ChatRoom);
+    try {
+      const chatDoc = await getDoc(
+        doc(firestore, `${Collection.CHATS}/${chatId}`)
+      );
+      setData(chatDoc.data() as ChatRoom);
+    } catch (error) {
+      setExists(false);
+    }
   }, [chatId]);
 
   useEffect(() => {
     fetchChatData();
   }, [fetchChatData]);
 
-  return { data };
+  return { data, exists };
 };

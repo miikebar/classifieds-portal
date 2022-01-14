@@ -7,6 +7,8 @@ import { LocationInput } from './LocationInput';
 import { SearchIconGroup } from './SearchIconGroup';
 import { useSearchForm, UseSearchFromProps } from './useSearchForm';
 
+const km2m = (km: number) => km * 1000;
+
 export const Search: React.FC<UseSearchFromProps> = (props) => {
   const { register, setValue, handleSubmit } = useSearchForm(props);
 
@@ -37,9 +39,24 @@ export const Search: React.FC<UseSearchFromProps> = (props) => {
           </select>
         </SearchIconGroup>
         <SearchIconGroup title="Gdzie szukasz" icon={<IconMarker />}>
-          <LocationInput
-            onPlaceSelect={(place) => setValue('location', place as any)}
-          />
+          <div className="flex">
+            <div className="flex-1">
+              <LocationInput
+                onPlaceSelect={(place) => setValue('location', place as any)}
+              />
+            </div>
+            <select {...register('radius')}>
+              <option value={1}>+0 km</option>
+              <option value={km2m(2)}>+2 km</option>
+              <option value={km2m(5)}>+5 km</option>
+              <option value={km2m(10)}>+10 km</option>
+              <option value={km2m(15)}>+15 km</option>
+              <option value={km2m(30)}>+30 km</option>
+              <option value={km2m(50)}>+50 km</option>
+              <option value={km2m(75)}>+75 km</option>
+              <option value={km2m(100)}>+100 km</option>
+            </select>
+          </div>
         </SearchIconGroup>
         <Button type="submit" className="h-14 px-10">
           Szukaj

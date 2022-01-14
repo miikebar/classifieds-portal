@@ -14,10 +14,15 @@ const index = client.initIndex(
 
 interface UseOfferListProps {
   query?: string;
+  radius?: number | 'all';
   location?: Offer['_geoloc'];
 }
 
-export const useOfferList = ({ query, location }: UseOfferListProps = {}) => {
+export const useOfferList = ({
+  query,
+  radius,
+  location,
+}: UseOfferListProps = {}) => {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<OfferSearchIndex[]>([]);
 
@@ -25,11 +30,12 @@ export const useOfferList = ({ query, location }: UseOfferListProps = {}) => {
     const { hits } = await index.search<OfferSearchIndex>(query ?? '', {
       ...(location && {
         aroundLatLng: `${location.lat}, ${location.lng}`,
+        aroundRadius: radius,
       }),
     });
     setData(hits);
     setLoading(false);
-  }, [location, query]);
+  }, [location, query, radius]);
 
   useEffect(() => {
     fetchOffers();

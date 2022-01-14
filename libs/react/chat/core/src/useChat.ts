@@ -44,5 +44,11 @@ export const useChat = ({ chatId, onError, onNewMessage }: UseChatProps) => {
     [chatId, onError, uid]
   );
 
-  return { isPending, sendMessage, chat: chatData.data, ...chatMessages };
+  return {
+    isPending,
+    sendMessage,
+    chat: chatData.data,
+    chatExists: chatData.exists,
+    ...chatMessages,
+  };
 };

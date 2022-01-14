@@ -7,11 +7,12 @@ import { Offer } from '@listic/feature-offer-types';
 
 const LandingPage: PageWithLayout = () => {
   const [query, setQuery] = useState('');
+  const [radius, setRadius] = useState<number | 'all'>(1);
   const [location, setLocation] = useState<Offer['_geoloc'] | null>(null);
 
   return (
     <div className="flex-1 flex flex-col bg-gray-100">
-      <div className="flex flex-col min-h-hero bg-blue-50">
+      <div className="flex flex-col min-h-hero bg-blue-50 py-8">
         <Container className="flex flex-1 justify-center items-center md:justify-start">
           <div className="flex flex-col sm:px-16 lg:px-0 w-full">
             <div className="max-w-heroText">
@@ -28,16 +29,17 @@ const LandingPage: PageWithLayout = () => {
               </p>
             </div>
             <Search
-              onQueryChange={(query, location) => {
+              onQueryChange={(query, location, radius) => {
                 setQuery(query);
                 setLocation(location);
+                setRadius(radius);
               }}
             />
           </div>
         </Container>
       </div>
       <Container className="my-8">
-        <OfferList query={query} location={location} />
+        <OfferList query={query} location={location} radius={radius} />
       </Container>
     </div>
   );

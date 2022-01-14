@@ -21,7 +21,7 @@ module.exports = {
         heroText: '672px',
       },
       minHeight: {
-        hero: '800px',
+        hero: '600px',
         textarea: '300px',
       },
       width: {
