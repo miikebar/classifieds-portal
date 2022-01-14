@@ -98,7 +98,7 @@ export const AuthSignUpForm: React.FC = () => {
           />
           <FormErrorMessage>Hasło musi mieć minimum 6 znaków</FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.phone}>
+        <FormControl isRequired isInvalid={!!errors.phone}>
           <FormLabel>Numer telefonu</FormLabel>
           <Input
             type="tel"

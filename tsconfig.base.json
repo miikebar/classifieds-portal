@@ -52,6 +52,7 @@
       "@listic/feature/offer/create": [
         "libs/feature/offer/create/src/index.ts"
       ],
+      "@listic/feature/offer/edit": ["libs/feature/offer/edit/src/index.ts"],
       "@listic/feature/offer/list": ["libs/feature/offer/list/src/index.ts"],
       "@listic/feature/offer/manage": [
         "libs/feature/offer/manage/src/index.ts"

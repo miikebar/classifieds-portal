@@ -20,6 +20,7 @@ import Skeleton from 'react-loading-skeleton';
 import Image from 'next/image';
 import { useOfferGallery } from '@listic/react/offer/gallery';
 import { ReactComponent as IconAngleLeft } from '@listic/ui/icons/angle-left-solid.svg';
+import Link from 'next/link';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
@@ -122,13 +123,15 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
           status
         </p>
         <div className="flex gap-4">
-          <Button
-            isDisabled={!offer.isActive}
-            variant="ghost"
-            className="flex-1"
-          >
-            Edytuj
-          </Button>
+          <Link passHref href={`${Route.OFFER.EDIT}/${offer.id}`}>
+            <Button
+              isDisabled={!offer.isActive}
+              variant="ghost"
+              className="flex-1"
+            >
+              Edytuj
+            </Button>
+          </Link>
           <Button
             isLoading={isPending}
             className="flex-1"

@@ -6,7 +6,8 @@ export const Route = {
   },
   OFFER: {
     VIEW: '/offer',
-    CREATE: '/create-offer',
+    CREATE: '/offer/create',
+    EDIT: '/offer/edit',
   },
   CHAT: '/chat',
 };

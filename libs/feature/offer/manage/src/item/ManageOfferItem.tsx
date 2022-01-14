@@ -1,18 +1,14 @@
-import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
-import { Container } from '@listic/ui/container';
-import { OfferWithId, useUserOffers } from '@listic/react/offer/list';
+import { Collection } from '@listic/core-firebase-utils';
+import { Product } from '@listic/core-payment';
+import { Route } from '@listic/feature/route';
+import { OfferWithId } from '@listic/react/offer/list';
 import { useCreateCheckoutSession } from '@listic/react/payment';
 import { Button } from '@listic/ui/button';
-import { Product } from '@listic/core-payment';
-import { useEffect, useState } from 'react';
 import format from 'date-fns/format';
 import { Timestamp } from 'firebase-admin/firestore';
 import Link from 'next/link';
-import { Route } from '@listic/feature/route';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useAuthGuard } from '@listic/react/utils';
-import { Collection } from '@listic/core-firebase-utils';
 
 interface ManageOfferItemProps {
   offer: OfferWithId;
@@ -96,9 +92,16 @@ export const ManageOfferItem: React.FC<ManageOfferItemProps> = ({ offer }) => {
           Promuj przez 30 dni
         </Button>
         <div className="flex flex-col md:flex-row gap-2">
-          <Button isDisabled={isPending} variant="secondary" className="flex-1">
-            Edytuj
-          </Button>
+          <Link passHref href={`${Route.OFFER.EDIT}/${offer.id}`}>
+            <Button
+              as="a"
+              isDisabled={isPending}
+              variant="secondary"
+              className="flex-1"
+            >
+              Edytuj
+            </Button>
+          </Link>
           <Button
             isLoading={isDeleting}
             loadingText="Usuwanie"
@@ -125,6 +128,9 @@ export const ManageOfferItem: React.FC<ManageOfferItemProps> = ({ offer }) => {
         </Link>
         <span className="text-gray-500">
           {format((offer.createdAt as Timestamp).toDate(), 'dd.MM.yyyy')}
+        </span>
+        <span className="text-gray-500">
+          Status: {offer.isActive ? 'Aktywna' : 'Zakończona'}
         </span>
       </div>
       {renderPromoteSection()}
