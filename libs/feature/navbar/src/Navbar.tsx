@@ -23,6 +23,7 @@ export const Navbar: React.FC = () => {
             icon={<BarsIcon />}
             onClick={open}
             className="md:hidden mr-2"
+            title="Otwórz menu"
           />
           <Link passHref href={Route.LANDING_PAGE}>
             <a>

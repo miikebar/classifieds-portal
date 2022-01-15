@@ -21,6 +21,7 @@ import Image from 'next/image';
 import { useOfferGallery } from '@listic/react/offer/gallery';
 import { ReactComponent as IconAngleLeft } from '@listic/ui/icons/angle-left-solid.svg';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 interface OfferPageProps {
   offer: Omit<Offer, 'createdAt' | 'updatedAt' | 'promoteExpires' | 'owner'> & {
@@ -145,86 +146,93 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
   };
 
   return (
-    <div className="flex-1 bg-gray-100">
-      <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
-        <div className="flex flex-col gap-4 lg:w-3/4">
-          {!isLoading && !offer.isActive && (
-            <Card className="offer-closed">
-              Ta oferta została zakończona przez sprzedawcę
-            </Card>
-          )}
-          {(!!offer?.images?.length || isLoading) && (
+    <>
+      <NextSeo title={offer?.name} description={offer?.description} />
+      <div className="flex-1 bg-gray-100">
+        <Container className="flex flex-col gap-4 mt-8 lg:flex-row ">
+          <div className="flex flex-col gap-4 lg:w-3/4">
+            {!isLoading && !offer.isActive && (
+              <Card className="offer-closed">
+                Ta oferta została zakończona przez sprzedawcę
+              </Card>
+            )}
+            {(!!offer?.images?.length || isLoading) && (
+              <Card>
+                <div className="aspect-video rounded-md overflow-hidden shadow-md relative">
+                  {isLoading ? (
+                    <Skeleton width="100%" height="100%" />
+                  ) : (
+                    <Image
+                      src={gallery.currentImg}
+                      layout="fill"
+                      objectFit="contain"
+                      sizes="(max-width: 1023px) 100vw, 65vw"
+                      priority
+                      alt={offer.name}
+                    />
+                  )}
+                  {gallery.hasMultipleImages && (
+                    <>
+                      <div className="bg-gray-300 absolute right-4 top-4 py-1 px-2 text-sm rounded-xl">{`${
+                        gallery.currentImgIdx + 1
+                      }/${gallery.totalImages}`}</div>
+                      <div className="absolute top-1/2 -translate-y-1/2 flex justify-between left-0 right-0 px-4">
+                        <button
+                          className="bg-gray-300 w-10 h-10 rounded-full"
+                          onClick={gallery.prevImage}
+                        >
+                          <IconAngleLeft className="h-7 text-gray-600 block mx-auto" />
+                        </button>
+                        <button
+                          className="bg-gray-300 w-10 h-10 rounded-full"
+                          onClick={gallery.nextImage}
+                        >
+                          <IconAngleLeft className="h-7 text-gray-600 block mx-auto rotate-180" />
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </Card>
+            )}
             <Card>
-              <div className="aspect-video rounded-md overflow-hidden shadow-md relative">
-                {isLoading ? (
-                  <Skeleton width="100%" height="100%" />
+              <span className="text-sm text-gray-500 block mb-1">
+                {offer ? (
+                  `${offer.location}, dodano ${offer.createdAt}`
                 ) : (
-                  <Image
-                    src={gallery.currentImg}
-                    layout="fill"
-                    objectFit="contain"
-                    sizes="(max-width: 1023px) 100vw, 65vw"
-                    priority
-                    alt={offer.name}
-                  />
+                  <Skeleton width="200px" />
                 )}
-                {gallery.hasMultipleImages && (
-                  <>
-                    <div className="bg-gray-300 absolute right-4 top-4 py-1 px-2 text-sm rounded-xl">{`${
-                      gallery.currentImgIdx + 1
-                    }/${gallery.totalImages}`}</div>
-                    <div className="absolute top-1/2 -translate-y-1/2 flex justify-between left-0 right-0 px-4">
-                      <button
-                        className="bg-gray-300 w-10 h-10 rounded-full"
-                        onClick={gallery.prevImage}
-                      >
-                        <IconAngleLeft className="h-7 text-gray-600 block mx-auto" />
-                      </button>
-                      <button
-                        className="bg-gray-300 w-10 h-10 rounded-full"
-                        onClick={gallery.nextImage}
-                      >
-                        <IconAngleLeft className="h-7 text-gray-600 block mx-auto rotate-180" />
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
-            </Card>
-          )}
-          <Card>
-            <span className="text-sm text-gray-500 block mb-1">
-              {offer ? (
-                `${offer.location}, dodano ${offer.createdAt}`
-              ) : (
-                <Skeleton width="200px" />
-              )}
-            </span>
-            <Card.Header>
-              <h2 className="text-3xl mb-3">{offer?.name}</h2>
-              <span className="font-bold text-4xl text-gray-700">
-                {!isLoading ? `${offer.price} zł` : <Skeleton width="100px" />}
               </span>
-              {!isLoading ? (
-                <a
-                  href="#cat"
-                  className="border self-start py-1 px-2 border-gray-500 rounded-md text-sm mt-2 transition-colors hover:bg-gray-100"
-                >
-                  {offer?.category}
-                </a>
-              ) : (
-                <Skeleton width="80px" />
-              )}
-            </Card.Header>
-            <p>{offer?.description ?? <Skeleton count={10} />}</p>
-          </Card>
-        </div>
-        <div className="lg:w-1/4">
-          {(isLoading || uid) !== offer?.owner.id && renderSellerInfo()}
-          {!isLoading && uid === offer?.owner.id && renderOfferManagement()}
-        </div>
-      </Container>
-    </div>
+              <Card.Header>
+                <h2 className="text-3xl mb-3">{offer?.name}</h2>
+                <span className="font-bold text-4xl text-gray-700">
+                  {!isLoading ? (
+                    `${offer.price} zł`
+                  ) : (
+                    <Skeleton width="100px" />
+                  )}
+                </span>
+                {!isLoading ? (
+                  <a
+                    href="#cat"
+                    className="border self-start py-1 px-2 border-gray-500 rounded-md text-sm mt-2 transition-colors hover:bg-gray-100"
+                  >
+                    {offer?.category}
+                  </a>
+                ) : (
+                  <Skeleton width="80px" />
+                )}
+              </Card.Header>
+              <p>{offer?.description ?? <Skeleton count={10} />}</p>
+            </Card>
+          </div>
+          <div className="lg:w-1/4">
+            {(isLoading || uid) !== offer?.owner.id && renderSellerInfo()}
+            {!isLoading && uid === offer?.owner.id && renderOfferManagement()}
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 

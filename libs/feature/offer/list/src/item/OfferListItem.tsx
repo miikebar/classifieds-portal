@@ -24,6 +24,7 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
                 width={128}
                 height={128}
                 objectFit="contain"
+                alt={offer.name}
               />
             )}
             {!offer.images?.length && (
@@ -51,7 +52,7 @@ export const OfferListItem: React.FC<OfferListItemProps> = ({ offer }) => {
                 </span>
               )}
               {offer.isPromoted && (
-                <span className="bg-blue-400 text-white p-2 rounded-md text-sm">
+                <span className="bg-blue-600 text-white p-2 rounded-md text-sm">
                   Oferta promowana
                 </span>
               )}
