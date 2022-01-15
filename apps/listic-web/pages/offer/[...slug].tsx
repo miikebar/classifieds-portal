@@ -180,12 +180,14 @@ const OfferPage: PageWithLayout<OfferPageProps> = ({ offer }) => {
                         <button
                           className="bg-gray-300 w-10 h-10 rounded-full"
                           onClick={gallery.prevImage}
+                          title="Poprzednie zdjęcie"
                         >
                           <IconAngleLeft className="h-7 text-gray-600 block mx-auto" />
                         </button>
                         <button
                           className="bg-gray-300 w-10 h-10 rounded-full"
                           onClick={gallery.nextImage}
+                          title="Następne zdjęcie"
                         >
                           <IconAngleLeft className="h-7 text-gray-600 block mx-auto rotate-180" />
                         </button>

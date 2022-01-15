@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 class ListicDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="pl">
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
