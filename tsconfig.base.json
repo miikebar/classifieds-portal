@@ -61,6 +61,7 @@
       "@listic/feature/search": ["libs/feature/search/src/index.ts"],
       "@listic/react/auth/core": ["libs/react/auth/core/src/index.ts"],
       "@listic/react/chat/core": ["libs/react/chat/core/src/index.ts"],
+      "@listic/react/chat/create": ["libs/react/chat/create/src/index.ts"],
       "@listic/react/firebase/functions": [
         "libs/react/firebase/functions/src/index.ts"
       ],

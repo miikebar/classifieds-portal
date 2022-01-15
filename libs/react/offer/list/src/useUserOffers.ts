@@ -1,14 +1,6 @@
 import { Collection } from '@listic/core-firebase-utils';
-import { firestore } from '@listic/core/firebase/firestore';
 import { Offer } from '@listic/feature-offer-types';
 import { useAuth } from '@listic/react/auth/core';
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 
 export interface OfferWithId extends Offer {
@@ -20,29 +12,37 @@ export const useUserOffers = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<OfferWithId[]>([]);
 
-  const fetchUserOffers = useCallback(() => {
+  const fetchUserOffers = useCallback(async () => {
     if (!uid) return;
 
+    const [query, collection, where, orderBy, getDocs, firestoreLite] =
+      await Promise.all([
+        import('firebase/firestore/lite').then((m) => m.query),
+        import('firebase/firestore/lite').then((m) => m.collection),
+        import('firebase/firestore/lite').then((m) => m.where),
+        import('firebase/firestore/lite').then((m) => m.orderBy),
+        import('firebase/firestore/lite').then((m) => m.getDocs),
+        import('@listic/core/firebase/firestore-lite').then(
+          (m) => m.firestoreLite
+        ),
+      ]);
+
     const offersQuery = query(
-      collection(firestore, Collection.OFFERS),
+      collection(firestoreLite, Collection.OFFERS),
       where('owner.id', '==', uid),
       orderBy('createdAt')
     );
 
-    const unsubscribe = onSnapshot(offersQuery, (snapshot) => {
-      setLoading(false);
-      setData(
-        snapshot.docs.map(
-          (doc) => ({ id: doc.id, ...doc.data() } as OfferWithId)
-        )
-      );
-    });
+    const snapshot = await getDocs(offersQuery);
 
-    return unsubscribe;
+    setData(
+      snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as OfferWithId))
+    );
+    setLoading(false);
   }, [uid]);
 
   useEffect(() => {
-    return fetchUserOffers();
+    fetchUserOffers();
   }, [fetchUserOffers]);
 
   return { data, isLoading };

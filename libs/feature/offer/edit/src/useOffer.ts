@@ -1,7 +1,5 @@
 import { Collection } from '@listic/core-firebase-utils';
-import { firestore } from '@listic/core/firebase/firestore';
 import { Offer } from '@listic/feature-offer-types';
-import { doc, getDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 
 interface UseOfferProps {
@@ -14,8 +12,15 @@ export const useOffer = ({ offerId }: UseOfferProps) => {
 
   const fetchOfferData = useCallback(async () => {
     try {
+      const [getDoc, doc, firestoreLite] = await Promise.all([
+        import('firebase/firestore/lite').then((m) => m.getDoc),
+        import('firebase/firestore/lite').then((m) => m.doc),
+        import('@listic/core/firebase/firestore-lite').then(
+          (m) => m.firestoreLite
+        ),
+      ]);
       const offerDoc = await getDoc(
-        doc(firestore, `${Collection.OFFERS}/${offerId}`)
+        doc(firestoreLite, `${Collection.OFFERS}/${offerId}`)
       );
       setData(offerDoc.data() as Offer);
     } catch (error) {

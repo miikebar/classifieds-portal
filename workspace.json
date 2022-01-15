@@ -980,6 +980,29 @@
         }
       }
     },
+    "react-chat-create": {
+      "root": "libs/react/chat/create",
+      "sourceRoot": "libs/react/chat/create/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react/chat/create/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react/chat/create"],
+          "options": {
+            "jestConfig": "libs/react/chat/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "react-firebase-functions": {
       "root": "libs/react/firebase/functions",
       "sourceRoot": "libs/react/firebase/functions/src",

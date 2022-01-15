@@ -8,7 +8,7 @@ export const EditOfferPage: PageWithLayout = () => {
   const offerId = router.query.id as string;
 
   return (
-    <div className="flex-1 bg-gray-100">
+    <div className="flex-1 bg-gray-100 test">
       <Container className="pt-4">
         <EditOfferForm offerId={offerId} />
       </Container>

@@ -23,10 +23,17 @@ export const CreateOfferForm: React.FC = () => {
     formState: { errors },
   } = useCreateOfferForm({
     onSuccess: ({ id, offer }) => {
-      toast.success(
-        'Sukces! Za chwile zostaniesz przekierowany na stronę ze swoją ofertą!'
+      const routeChange = router.push(
+        `${Route.OFFER.VIEW}/${id}.${offer.slug}`
       );
-      router.push(`${Route.OFFER.VIEW}/${id}.${offer.slug}`);
+
+      toast.promise(routeChange, {
+        loading:
+          'Oferta została dodana. Za chwilę nastąpi przekierowanie na stronę z utworzonym ogłoszeniem.',
+        success: 'Ogłoszenie jest już publicznie dostępne!',
+        error:
+          'Podczas generowania strony z ogłoszeniem wystąpił błąd. Spróbuj ponownie później!',
+      });
     },
     onError: () => {
       toast.error('Podczas dodawania oferty wystąpił błąd. Spróbuj ponownie!');

@@ -1,13 +1,10 @@
 import { superstructResolver } from '@hookform/resolvers/superstruct/dist/superstruct';
-import { Collection } from '@listic/core-firebase-utils';
-import { firestoreLite } from '@listic/core/firebase/firestore-lite';
+import { Collection, Storage } from '@listic/core-firebase-utils';
 import { CreateOfferData, CreateOfferSchema } from '@listic/core/offer';
-import { doc, updateDoc } from 'firebase/firestore/lite';
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { useOffer } from './useOffer';
-import { Storage } from '@listic/core-firebase-utils';
 
 interface UseEditOfferProps {
   offerId: string;
@@ -101,10 +98,15 @@ export const useEditOffer = ({
         .map((file) => file.preview);
       const uploaded = await uploadFiles();
 
-      console.log([...images, ...uploaded]);
-
       try {
         setPending(true);
+        const [updateDoc, doc, firestoreLite] = await Promise.all([
+          import('firebase/firestore/lite').then((m) => m.updateDoc),
+          import('firebase/firestore/lite').then((m) => m.doc),
+          import('@listic/core/firebase/firestore-lite').then(
+            (m) => m.firestoreLite
+          ),
+        ]);
         await updateDoc(doc(firestoreLite, Collection.OFFERS, offerId), {
           ...data,
           images: [...images, ...uploaded],

@@ -6,7 +6,7 @@ import { findChatID } from '@listic/feature/chat/utils';
 import { getMainLayout, PageWithLayout } from '@listic/feature/layout';
 import { Route } from '@listic/feature/route';
 import { useAuth } from '@listic/react/auth/core';
-import { useCreateChatRoom } from '@listic/react/chat/core';
+import { useCreateChatRoom } from '@listic/react/chat/create';
 import { Button } from '@listic/ui/button';
 import { Card } from '@listic/ui/card';
 import { Container } from '@listic/ui/container';
